@@ -359,6 +359,17 @@ a.nav__cta:hover { background: var(--blue); color: var(--ink); transform: transl
 .footer__contact a { color: var(--muted); }
 .footer__fine { color: var(--muted); opacity: 0.6; margin-top: 0.8rem; }
 
+/* Studio credit — quiet, but a real followed link */
+.footer__credit { color: var(--muted); opacity: 0.55; margin-top: 0.55rem; }
+.footer__credit a {
+  color: var(--blue); text-decoration: none;
+  border-bottom: 1px solid rgba(75, 156, 211, 0.35);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.footer__credit a:hover, .footer__credit a:focus-visible {
+  color: var(--blue-bright); border-bottom-color: var(--blue-bright);
+}
+
 /* ============ REVEALS ============ */
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.is-in { opacity: 1; transform: none; }

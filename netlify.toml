@@ -12,3 +12,10 @@
   for = "/data/*"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+# Conor's admin guide. Lives on the site so it has a stable, on-brand address,
+# but it's for him — keep it out of search results for his name.
+[[headers]]
+  for = "/guide/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
