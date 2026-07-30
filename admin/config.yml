@@ -1,0 +1,55 @@
+# Decap CMS config — gives Conor a form-based editor at /admin
+# for shows and music. Edits are committed straight to the repo,
+# which triggers a Netlify redeploy.
+#
+# SETUP (one-time, see README): replace REPO_PLACEHOLDER with the real
+# "org/repo" and enable the GitHub OAuth provider on the Netlify site.
+
+backend:
+  name: github
+  repo: REPO_PLACEHOLDER # e.g. bytomorrow-ai/conor-pederson-music
+  branch: main
+  base_url: https://api.netlify.com
+
+media_folder: "assets/img"
+public_folder: "/assets/img"
+
+site_url: https://conorpedersonmusic.com
+logo_url: /assets/img/art-jamaica-freestyle.jpg
+
+collections:
+  - name: "site"
+    label: "Site Content"
+    files:
+      - name: "shows"
+        label: "Upcoming Shows"
+        file: "data/shows.json"
+        description: "Add, edit, or remove shows. A show stays on the site through the end of the month it happens in, then disappears automatically."
+        fields:
+          - label: "Shows"
+            name: "shows"
+            widget: "list"
+            summary: "{{fields.date}} — {{fields.venue}}, {{fields.city}}"
+            fields:
+              - { label: "Date", name: "date", widget: "date", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, hint: "The show date. It auto-hides after that month ends." }
+              - { label: "Time", name: "time", widget: "string", required: false, hint: "e.g. 6:00 PM" }
+              - { label: "Venue", name: "venue", widget: "string" }
+              - { label: "City", name: "city", widget: "string", hint: "e.g. Franklin, TN" }
+              - { label: "Ticket label", name: "ticket_label", widget: "string", required: false, default: "FREE", hint: "Shown when there is no ticket link (e.g. FREE)" }
+              - { label: "Ticket link", name: "ticket_url", widget: "string", required: false, hint: "Paste a ticket/event URL, or leave blank" }
+      - name: "music"
+        label: "Music"
+        file: "data/music.json"
+        description: "Add releases. Check 'Featured' on the one to spotlight at the top — usually the newest."
+        fields:
+          - label: "Releases"
+            name: "releases"
+            widget: "list"
+            summary: "{{fields.title}} ({{fields.type}})"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Type", name: "type", widget: "select", options: ["Single", "EP", "Album"] }
+              - { label: "Release date", name: "released", widget: "date", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Smart link", name: "link", widget: "string", hint: "The ffm.to link (or Spotify/Apple link)" }
+              - { label: "Artwork", name: "artwork", widget: "image" }
+              - { label: "Featured", name: "featured", widget: "boolean", default: false, hint: "Only one release should be featured at a time" }

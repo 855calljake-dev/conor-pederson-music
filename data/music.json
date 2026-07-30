@@ -1,0 +1,36 @@
+{
+  "releases": [
+    {
+      "title": "Jamaica Free$tyle",
+      "type": "Single",
+      "released": "2026-07-29",
+      "link": "https://ffm.to/jamaica-freetyle-singl",
+      "artwork": "/assets/img/art-jamaica-freestyle.jpg",
+      "featured": true
+    },
+    {
+      "title": "All To My Name",
+      "type": "Single",
+      "released": "2026-01-30",
+      "link": "https://ffm.to/kz08om4",
+      "artwork": "/assets/img/art-all-to-my-name.jpg",
+      "featured": false
+    },
+    {
+      "title": "Don't Be Surprised",
+      "type": "Single",
+      "released": "2025-09-04",
+      "link": "https://ffm.to/qxmnb3y",
+      "artwork": "/assets/img/art-dont-be-surprised.jpg",
+      "featured": false
+    },
+    {
+      "title": "Be Who You Be",
+      "type": "EP",
+      "released": "2025-05-27",
+      "link": "https://ffm.to/ajy9k8v",
+      "artwork": "/assets/img/art-be-who-you-be.jpg",
+      "featured": false
+    }
+  ]
+}

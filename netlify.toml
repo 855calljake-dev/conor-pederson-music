@@ -1,0 +1,14 @@
+# Conor Pederson Music — static site, no build step
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# Shows/music JSON must never be cached stale — they drive the page
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

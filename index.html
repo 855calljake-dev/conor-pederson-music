@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conor Pederson — Official Site</title>
+<meta name="description" content="Conor Pederson is an artist and songwriter from Pittsburgh — Pop, R&B, Country, Hip-Hop and the classics. Listen now, see upcoming shows, and book Conor for your event.">
+<meta property="og:title" content="Conor Pederson — Official Site">
+<meta property="og:description" content="New single Jamaica Free$tyle out now. Shows, music, and booking.">
+<meta property="og:image" content="/assets/img/art-jamaica-freestyle.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/jpeg" href="/assets/img/art-jamaica-freestyle.jpg">
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+<div class="noise" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="top">
+  <a class="nav__brand" href="#top">CP</a>
+  <nav class="nav__links" aria-label="Main">
+    <a href="#about">About</a>
+    <a href="#shows">Shows</a>
+    <a href="#music">Music</a>
+    <a href="#booking" class="nav__cta">Book Conor</a>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="hero__glow hero__glow--blue" aria-hidden="true"></div>
+  <div class="hero__glow hero__glow--purple" aria-hidden="true"></div>
+
+  <div class="hero__inner">
+    <p class="hero__kicker reveal">Pittsburgh-born artist &amp; songwriter</p>
+    <h1 class="hero__name">
+      <span class="hero__line reveal">CONOR</span>
+      <span class="hero__line hero__line--outline reveal">PEDERSON</span>
+    </h1>
+    <div class="hero__actions reveal">
+      <a class="btn btn--primary" href="#music">Listen Now</a>
+      <a class="btn btn--ghost" href="#shows">Upcoming Shows</a>
+    </div>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>POP</span><i>✦</i><span>R&amp;B</span><i>✦</i><span>COUNTRY</span><i>✦</i><span>HIP-HOP</span><i>✦</i><span>CLASSICS</span><i>✦</i>
+      <span>POP</span><i>✦</i><span>R&amp;B</span><i>✦</i><span>COUNTRY</span><i>✦</i><span>HIP-HOP</span><i>✦</i><span>CLASSICS</span><i>✦</i>
+      <span>POP</span><i>✦</i><span>R&amp;B</span><i>✦</i><span>COUNTRY</span><i>✦</i><span>HIP-HOP</span><i>✦</i><span>CLASSICS</span><i>✦</i>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about section" id="about">
+  <div class="section__head reveal">
+    <span class="section__num">01</span>
+    <h2 class="section__title">About</h2>
+  </div>
+  <div class="about__grid">
+    <figure class="about__photo about__photo--tall reveal">
+      <img src="/assets/img/about-night.jpg" alt="Conor Pederson playing acoustic guitar outdoors under the moon" loading="lazy">
+    </figure>
+    <div class="about__copy">
+      <p class="about__lede reveal">Conor Pederson is an artist and songwriter whose dynamic voice shines through in his music, gracefully traversing various genres and sonic pockets.</p>
+      <p class="reveal">The Pittsburgh native's warm, textured tone and soulful melodic instinct blend tastefully with sincere, conversational lyricism.</p>
+      <p class="reveal">Conor's artistic versatility is on full display at his live shows, where he infuses his unique style and sound into classics spanning various genres and time periods. From Pop to R&amp;B to Country to Hip&nbsp;Hop, the songs you will hear during one of Conor's performances are a portrait of the musical influences that have inspired and ignited his passion for music.</p>
+      <p class="about__tag reveal"><span class="mono">VOCALS + ACOUSTIC GUITAR</span></p>
+    </div>
+    <figure class="about__photo about__photo--wide reveal">
+      <img src="/assets/img/about-brick.jpg" alt="Conor Pederson on stage with acoustic guitar and sunglasses" loading="lazy">
+    </figure>
+  </div>
+</section>
+
+<!-- ============ SHOWS ============ -->
+<section class="shows section" id="shows">
+  <div class="section__head reveal">
+    <span class="section__num">02</span>
+    <h2 class="section__title">Upcoming Shows</h2>
+  </div>
+  <div class="shows__list" id="shows-list" aria-live="polite">
+    <!-- populated by main.js from /data/shows.json -->
+  </div>
+  <p class="shows__empty reveal" id="shows-empty" hidden>No shows on the calendar right now — follow along on socials for the next announcement.</p>
+</section>
+
+<!-- ============ MUSIC ============ -->
+<section class="music section" id="music">
+  <div class="section__head reveal">
+    <span class="section__num">03</span>
+    <h2 class="section__title">Music</h2>
+  </div>
+  <div id="music-featured"></div>
+  <div class="music__grid" id="music-grid"></div>
+</section>
+
+<!-- ============ BOOKING ============ -->
+<section class="booking section" id="booking">
+  <div class="section__head reveal">
+    <span class="section__num">04</span>
+    <h2 class="section__title">Book Conor</h2>
+  </div>
+  <div class="booking__grid">
+    <div class="booking__blurb reveal">
+      <p>Booking Conor for a venue, private event, wedding, or party? Send the details and you'll hear back soon.</p>
+      <p class="mono booking__email"><a href="mailto:conorpedersonmusic@gmail.com">conorpedersonmusic@gmail.com</a></p>
+    </div>
+    <form class="form reveal" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks.html">
+      <input type="hidden" name="form-name" value="booking">
+      <p class="hidden-field"><label>Don't fill this out: <input name="bot-field"></label></p>
+      <div class="form__row">
+        <label class="form__field"><span>Name</span>
+          <input type="text" name="name" required autocomplete="name">
+        </label>
+        <label class="form__field"><span>Email</span>
+          <input type="email" name="email" required autocomplete="email">
+        </label>
+      </div>
+      <div class="form__row">
+        <label class="form__field"><span>Phone</span>
+          <input type="tel" name="phone" autocomplete="tel">
+        </label>
+        <label class="form__field"><span>Event date</span>
+          <input type="date" name="event_date">
+        </label>
+      </div>
+      <div class="form__row">
+        <label class="form__field"><span>Event location / venue</span>
+          <input type="text" name="event_location">
+        </label>
+        <label class="form__field"><span>Type of event</span>
+          <input type="text" name="event_type" placeholder="Venue show, wedding, private party…">
+        </label>
+      </div>
+      <label class="form__field"><span>Message</span>
+        <textarea name="message" rows="5" placeholder="Tell Conor about the event…"></textarea>
+      </label>
+      <button class="btn btn--primary form__submit" type="submit">Send Booking Request</button>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer__name" aria-hidden="true">CONOR PEDERSON</div>
+  <nav class="footer__social" aria-label="Social media">
+    <a href="https://www.instagram.com/conorpedersonmusic/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.tiktok.com/@conorpedersonmusic" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://open.spotify.com/artist/5o669JbDjMf7pHNp8jdrbU" target="_blank" rel="noopener">Spotify</a>
+    <a href="https://music.apple.com/us/artist/conor-pederson/1786901016" target="_blank" rel="noopener">Apple Music</a>
+    <a href="https://www.youtube.com/@conorpedersonmusic" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://www.facebook.com/profile.php?id=61591135575701" target="_blank" rel="noopener">Facebook</a>
+  </nav>
+  <p class="footer__contact mono">General: <a href="mailto:conorpedersonmusic@gmail.com">conorpedersonmusic@gmail.com</a></p>
+  <p class="footer__fine mono">© <span id="year"></span> Conor Pederson. All rights reserved.</p>
+</footer>
+
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
