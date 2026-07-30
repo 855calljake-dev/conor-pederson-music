@@ -22,12 +22,16 @@
 
 # Publish dir is "." so repo-root docs would otherwise be served to the public.
 # admin/config.yml stays readable on purpose — Decap needs to fetch it.
+# force = true is required: without it Netlify serves the real file and
+# skips the rule, because a static file at that path wins by default.
 [[redirects]]
   from = "/README.md"
   to = "/"
   status = 404
+  force = true
 
 [[redirects]]
   from = "/CONOR-GUIDE.md"
   to = "/"
   status = 404
+  force = true
