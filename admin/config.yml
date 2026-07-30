@@ -7,7 +7,7 @@
 
 backend:
   name: github
-  repo: REPO_PLACEHOLDER # e.g. bytomorrow-ai/conor-pederson-music
+  repo: 855calljake-dev/conor-pederson-music
   branch: main
   base_url: https://api.netlify.com
 
