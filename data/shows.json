@@ -7,12 +7,6 @@
       "city": "Franklin, TN",
       "ticket_label": "FREE",
       "ticket_url": ""
-    },
-    {
-      "ticket_label": "FREE",
-      "venue": "Pizzaz Italian Restaurant",
-      "city": "McMurray, PA",
-      "time": "7:30pm"
     }
   ]
 }
