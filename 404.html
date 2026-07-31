@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found — Conor Pederson</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+  .nf {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    padding: 2rem clamp(1.25rem, 6vw, 4rem); gap: 1.1rem;
+  }
+  .nf__code {
+    font-family: var(--display); font-weight: 700; line-height: 1;
+    font-size: clamp(5rem, 22vw, 12rem);
+    color: transparent; -webkit-text-stroke: 2px rgba(255, 255, 255, 0.16);
+    user-select: none;
+  }
+  .nf__title { font-family: var(--display); font-weight: 600; text-transform: uppercase;
+    font-size: clamp(1.5rem, 4vw, 2.2rem); letter-spacing: 0.02em; }
+  .nf__text { color: var(--muted); max-width: 34rem; }
+  .nf__links { display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center; margin-top: 0.6rem; }
+</style>
+</head>
+<body>
+
+<div class="noise" aria-hidden="true"></div>
+
+<main class="nf">
+  <div class="nf__code" aria-hidden="true">404</div>
+  <h1 class="nf__title">This page doesn't exist</h1>
+  <p class="nf__text">The link may be old, or there's a typo in the address. The music and the show dates are all on the main page.</p>
+  <div class="nf__links">
+    <a class="btn btn--primary" href="/">Back to the site</a>
+    <a class="btn btn--ghost" href="/#shows">Upcoming shows</a>
+    <a class="btn btn--ghost" href="/#booking">Book Conor</a>
+  </div>
+</main>
+
+</body>
+</html>

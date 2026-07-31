@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Conor's admin guide — reachable, but not for search results
+Disallow: /guide/
+Disallow: /admin/
+
+Sitemap: https://conorpedersonmusic.com/sitemap.xml
