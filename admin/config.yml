@@ -31,7 +31,7 @@ collections:
             widget: "list"
             summary: "{{fields.date}} — {{fields.venue}}, {{fields.city}}"
             fields:
-              - { label: "Date", name: "date", widget: "date", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, hint: "The show date. It auto-hides after that month ends." }
+              - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, hint: "The show date. It auto-hides after that month ends." }
               - { label: "Time", name: "time", widget: "string", required: false, hint: "e.g. 6:00 PM" }
               - { label: "Venue", name: "venue", widget: "string" }
               - { label: "City", name: "city", widget: "string", hint: "e.g. Franklin, TN" }
@@ -49,7 +49,7 @@ collections:
             fields:
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Type", name: "type", widget: "select", options: ["Single", "EP", "Album"] }
-              - { label: "Release date", name: "released", widget: "date", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Release date", name: "released", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
               - { label: "Smart link", name: "link", widget: "string", hint: "The ffm.to link (or Spotify/Apple link)" }
               - { label: "Artwork", name: "artwork", widget: "image" }
               - { label: "Featured", name: "featured", widget: "boolean", default: false, hint: "Only one release should be featured at a time" }
