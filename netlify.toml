@@ -1,5 +1,11 @@
-# Conor Pederson Music — static site, no build step
+# Conor Pederson Music — static site, no framework, no database.
+# One lightweight prebuild script (scripts/build.mjs, plain Node, no deps)
+# bakes JSON-LD + freshness dates + og:image into index.html from
+# data/*.json at deploy time, so AI crawlers see it without executing JS
+# (SOP-AGENTIC-SEO-WEBSITES.md §3.1/§4). Runs on every deploy, including
+# every Decap CMS save (a save is a commit, a commit triggers a redeploy).
 [build]
+  command = "node scripts/build.mjs"
   publish = "."
 
 [[headers]]

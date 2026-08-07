@@ -42,7 +42,6 @@ function renderShows(data) {
     .sort(function (a, b) { return a.date < b.date ? -1 : 1; });
 
   if (!shows.length) { empty.hidden = false; return; }
-  buildShowSchema(shows);
 
   list.innerHTML = shows.map(function (s) {
     var d = fmtShowDate(s.date);
@@ -68,9 +67,6 @@ function renderMusic(data) {
   if (!grid) return;
   var releases = (data.releases || []).slice()
     .sort(function (a, b) { return a.released > b.released ? -1 : 1; });
-
-  buildArtistSchema(releases);
-  buildReleaseSchema(releases);
 
   var featured = releases.filter(function (r) { return r.featured; })[0] || releases[0];
   var rest = releases.filter(function (r) { return r !== featured; });
@@ -105,110 +101,10 @@ function renderMusic(data) {
   observeReveals(grid);
 }
 
-/* ---------- structured data (JSON-LD) ----------
-   Generated from the SAME json the page renders from, so it can never
-   drift out of sync with what Conor edits in /admin. Google executes
-   this and reads the result. When the site moves to a build step, this
-   should be generated at build time instead — same shapes. */
-
-var SITE = "https://conorpedersonmusic.com";
-var ARTIST = "Conor Pederson";
-
-function abs(path) {
-  if (!path) return "";
-  return /^https?:\/\//.test(path) ? path : SITE + (path.charAt(0) === "/" ? "" : "/") + path;
-}
-
-function injectJsonLd(obj) {
-  var el = document.createElement("script");
-  el.type = "application/ld+json";
-  el.textContent = JSON.stringify(obj);
-  document.head.appendChild(el);
-}
-
-/* Social profiles are read out of the footer so there is one source of truth. */
-function socialProfiles() {
-  var out = [];
-  document.querySelectorAll(".footer__social a[href^='http']").forEach(function (a) {
-    out.push(a.href);
-  });
-  return out;
-}
-
-function artistNode() {
-  return { "@type": "MusicGroup", "@id": SITE + "#artist", name: ARTIST, url: SITE };
-}
-
-/* "6:00 PM" + "2026-08-25" -> "2026-08-25T18:00". Local time, no offset,
-   which schema.org permits and is safer than guessing a timezone. */
-function isoStart(dateStr, timeStr) {
-  var t = /^\s*(\d{1,2})(?::(\d{2}))?\s*([AaPp])\.?[Mm]/.exec(timeStr || "");
-  if (!t) return dateStr;
-  var h = +t[1] % 12;
-  if (t[3].toLowerCase() === "p") h += 12;
-  return dateStr + "T" + (h < 10 ? "0" + h : h) + ":" + (t[2] || "00");
-}
-
-function buildArtistSchema(releases) {
-  var featured = (releases || []).filter(function (r) { return r.featured; })[0];
-  injectJsonLd({
-    "@context": "https://schema.org",
-    "@type": "MusicGroup",
-    "@id": SITE + "#artist",
-    name: ARTIST,
-    url: SITE,
-    image: featured ? abs(featured.artwork) : undefined,
-    genre: ["R&B", "Pop", "Hip-Hop"],
-    sameAs: socialProfiles()
-  });
-}
-
-function buildShowSchema(shows) {
-  shows.forEach(function (s) {
-    var cityParts = String(s.city || "").split(",");
-    injectJsonLd({
-      "@context": "https://schema.org",
-      "@type": "MusicEvent",
-      name: ARTIST + " at " + s.venue,
-      startDate: isoStart(s.date, s.time),
-      eventStatus: "https://schema.org/EventScheduled",
-      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-      performer: artistNode(),
-      url: SITE + "#shows",
-      location: {
-        "@type": "Place",
-        name: s.venue,
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: (cityParts[0] || "").trim(),
-          addressRegion: (cityParts[1] || "").trim(),
-          addressCountry: "US"
-        }
-      },
-      offers: {
-        "@type": "Offer",
-        url: s.ticket_url || SITE + "#shows",
-        price: s.ticket_url ? undefined : "0",
-        priceCurrency: "USD",
-        availability: "https://schema.org/InStock"
-      }
-    });
-  });
-}
-
-function buildReleaseSchema(releases) {
-  releases.forEach(function (r) {
-    injectJsonLd({
-      "@context": "https://schema.org",
-      "@type": /album|ep/i.test(r.type || "") ? "MusicAlbum" : "MusicRecording",
-      name: r.title,
-      byArtist: artistNode(),
-      datePublished: r.released,
-      image: abs(r.artwork),
-      url: r.link || SITE + "#music"
-    });
-  });
-}
+/* Structured data (JSON-LD) is generated at build time, not here — see
+   scripts/build.mjs. AI crawlers don't reliably execute client-side JS
+   (SOP-AGENTIC-SEO-WEBSITES.md §3.1), so injecting it from this file would
+   be invisible to them; it's baked into index.html's raw HTML instead. */
 
 /* ---------- reveal-on-scroll ---------- */
 var io = null;
