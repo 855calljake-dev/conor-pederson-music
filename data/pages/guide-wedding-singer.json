@@ -1,0 +1,53 @@
+{
+  "path": "/booking/how-to-book-a-live-wedding-singer/",
+  "title": "How to Book a Live Wedding Singer: What to Ask Before You Hire",
+  "metaDescription": "A practical guide to booking live wedding music: what to ask, when to book, what a solo singer-guitarist typically costs, and how to lock it in writing.",
+  "kicker": "Booking Guide",
+  "h1": "How to Book a Live Wedding Singer",
+  "heroImage": "/assets/img/about-brick.jpg",
+  "heroImageAlt": "Conor Pederson on stage with acoustic guitar and sunglasses",
+  "intro": "<p class=\"about__lede reveal\">Book live wedding music by confirming the performer's sound (video or audio, not just photos), locking your date early, and getting the set list, timeline, and price in writing before you pay a deposit. Most couples book six months to a year out, since popular wedding dates fill first.</p>",
+  "sections": [
+    {
+      "heading": "Listen Before You Book",
+      "body": "<p class=\"reveal\">Photos don't tell you how someone sounds. Ask for a real video or audio clip &mdash; ideally something recent and live, not a polished studio recording &mdash; before you commit to a date.</p>"
+    },
+    {
+      "heading": "Confirm the Timeline",
+      "body": "<p class=\"reveal\">Walk through your day out loud: does the performer cover just the ceremony, or cocktail hour and reception too? A solo acoustic act can often carry all three without a second vendor &mdash; worth asking about directly, since it changes your quote and your setup logistics.</p>"
+    },
+    {
+      "heading": "Ask About Requests and Learning New Songs",
+      "body": "<p class=\"reveal\">If a first-dance song or a specific processional piece matters to you, ask whether the performer will learn it. Most will, given enough lead time &mdash; but it's a conversation to have before you book, not the week of.</p>"
+    },
+    {
+      "heading": "What It Typically Costs",
+      "body": "<p class=\"reveal\">Nationally, a solo wedding singer or singer-guitarist often runs somewhere in the low hundreds per hour, though it varies by region, experience, and how many hours you need covered. Get an exact quote for your date and timeline rather than assuming a number.</p>"
+    },
+    {
+      "heading": "Get It in Writing",
+      "body": "<p class=\"reveal\">Once you've picked someone, get the date, times, location, and price confirmed in writing &mdash; an email thread is enough, it doesn't need to be a formal contract. It protects both sides if plans shift.</p>"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "How far in advance should I book a wedding singer?",
+      "a": "As soon as you have a date. Popular dates and venues get booked well ahead of the event, sometimes six months to a year out."
+    },
+    {
+      "q": "Should I book direct or through a marketplace site?",
+      "a": "Marketplace sites are useful for browsing options, but booking direct usually means no added listing fee and a more direct line to the performer."
+    },
+    {
+      "q": "Can one solo performer cover ceremony, cocktail hour, and reception?",
+      "a": "Often, yes — a solo vocals-and-guitar act can adapt across all three without a band changeover. Confirm this directly with whoever you're booking."
+    }
+  ],
+  "breadcrumb": [
+    { "name": "Booking", "path": "/booking/" },
+    { "name": "How to Book a Wedding Singer", "path": "/booking/how-to-book-a-live-wedding-singer/" }
+  ],
+  "datePublished": "2026-08-07",
+  "relatedPath": "/booking/weddings/",
+  "relatedLabel": "Book Conor for your wedding"
+}

@@ -1,7 +1,61 @@
-User-agent: *
+# Explicit per-bot allow, not just the wildcard — so blocking one bot later
+# doesn't require guessing whether the wildcard rule was covering it
+# implicitly (SOP-AGENTIC-SEO-WEBSITES.md §3.1/§4.1). Every group repeats
+# the /guide/ and /admin/ disallow: a bot matches only its own most-specific
+# group, never falls through to the wildcard group below it.
+User-agent: GPTBot
 Allow: /
+Disallow: /guide/
+Disallow: /admin/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /guide/
+Disallow: /admin/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /guide/
+Disallow: /admin/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /guide/
+Disallow: /admin/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /guide/
+Disallow: /admin/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /guide/
+Disallow: /admin/
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /guide/
+Disallow: /admin/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /guide/
+Disallow: /admin/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /guide/
+Disallow: /admin/
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /guide/
+Disallow: /admin/
 
 # Conor's admin guide — reachable, but not for search results
+User-agent: *
+Allow: /
 Disallow: /guide/
 Disallow: /admin/
 

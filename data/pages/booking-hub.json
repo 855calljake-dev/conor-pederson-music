@@ -1,0 +1,44 @@
+{
+  "path": "/booking/",
+  "title": "Book Conor Pederson — Weddings, College Events & Private Parties",
+  "metaDescription": "Book Conor Pederson for weddings, college events, and private parties within about 100 miles of Pittsburgh. Vocals and acoustic guitar across Pop, R&B, Country, Hip-Hop, and the classics.",
+  "kicker": "Booking",
+  "h1": "Book Conor Pederson",
+  "heroImage": "/assets/img/hero-live.jpg",
+  "heroImageAlt": "Conor Pederson singing and playing acoustic guitar on stage under a spotlight",
+  "intro": "<p class=\"about__lede reveal\">Conor books weddings, private parties, and college events within about 100 miles of Pittsburgh &mdash; the South Hills and North Hills, Washington and Westmoreland counties, out to Morgantown and Wheeling, West Virginia, and Youngstown, Ohio. He performs solo: vocals and acoustic guitar, across Pop, R&amp;B, Country, Hip&#8209;Hop, and the classics.</p>",
+  "sections": [
+    {
+      "heading": "What Conor Plays",
+      "body": "<p class=\"reveal\">A solo acoustic set &mdash; vocals and guitar, no backing band required &mdash; built from originals and a wide covers range spanning Pop, R&amp;B, Country, Hip&#8209;Hop, and the classics. The set adapts to the room: quiet and conversational for a ceremony or dinner hour, full-energy for a dance floor or a crowd that wants to sing along.</p>"
+    },
+    {
+      "heading": "Service Area",
+      "body": "<p class=\"reveal\">Pittsburgh is home base. Most bookings land within about 100 miles &mdash; Pittsburgh proper, the South Hills, North Hills, Washington County, and Westmoreland County, plus Morgantown and Wheeling, West Virginia, and Youngstown, Ohio. A little further out? Ask &mdash; travel dates happen too.</p>"
+    },
+    {
+      "heading": "How Booking Works",
+      "body": "<p class=\"reveal\">Send the date, location, and event type through the form below or email <a href=\"mailto:conorpedersonmusic@gmail.com\">conorpedersonmusic@gmail.com</a> directly. No marketplace listing and no added booking fee &mdash; you're talking straight to Conor, not a booking coordinator.</p>"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "How far will Conor travel for a booking?",
+      "a": "Most bookings stay within about 100 miles of Pittsburgh. For anything further, reach out and ask — travel dates are considered case by case."
+    },
+    {
+      "q": "Is it cheaper to book through a marketplace like GigSalad or The Bash instead?",
+      "a": "Booking direct means no marketplace listing fee added to your quote, and you're coordinating straight with Conor rather than through a third party."
+    }
+  ],
+  "links": [
+    { "title": "Weddings", "blurb": "Ceremony, cocktail hour, and reception music.", "path": "/booking/weddings/" },
+    { "title": "College Events", "blurb": "Fraternity & sorority formals, campus programming, tailgates.", "path": "/booking/college-events/" },
+    { "title": "How to Book a Wedding Singer", "blurb": "What to ask before you hire live music.", "path": "/booking/how-to-book-a-live-wedding-singer/" },
+    { "title": "Booking Live Music for a College Event", "blurb": "A quick guide for social & programming chairs.", "path": "/booking/booking-live-music-for-a-college-event/" }
+  ],
+  "breadcrumb": [
+    { "name": "Booking", "path": "/booking/" }
+  ],
+  "datePublished": "2026-08-07"
+}

@@ -1,0 +1,49 @@
+{
+  "path": "/booking/booking-live-music-for-a-college-event/",
+  "title": "Booking Live Music for a College Event: A Quick Guide",
+  "metaDescription": "A quick guide for social chairs and programming boards on booking live music for a fraternity, sorority, or campus event — budget, logistics, and timeline.",
+  "kicker": "Booking Guide",
+  "h1": "Booking Live Music for a College Event",
+  "heroImage": "/assets/img/hero-live.jpg",
+  "heroImageAlt": "Conor Pederson singing and playing acoustic guitar on stage under a spotlight",
+  "intro": "<p class=\"about__lede reveal\">Booking live music for a chapter formal, social, or campus event usually comes down to three things: get budget approval before you start reaching out, confirm the space and any sound needs with your venue, and lock the date early since fall and spring formal seasons book up fast.</p>",
+  "sections": [
+    {
+      "heading": "Get Budget Sign-Off First",
+      "body": "<p class=\"reveal\">Whether it's a chapter treasury vote or a programming board budget line, get the number approved before you start quoting performers &mdash; it saves everyone a round of back-and-forth once you've already found someone you like.</p>"
+    },
+    {
+      "heading": "Check the Space",
+      "body": "<p class=\"reveal\">A solo acoustic act needs less than a full band: an outlet, a small footprint, and maybe a house or portable PA depending on the room size. Confirm what your venue already has versus what the performer needs to bring.</p>"
+    },
+    {
+      "heading": "Book Ahead of Formal Season",
+      "body": "<p class=\"reveal\">Fall and spring formal seasons are when most chapters and campus orgs are booking at once. Reaching out a few weeks to a couple months ahead of your date gives you the most options.</p>"
+    },
+    {
+      "heading": "Confirm Who's Handling Logistics",
+      "body": "<p class=\"reveal\">Designate one point of contact &mdash; social chair, programming board member, whoever &mdash; to handle the date, arrival time, and load-in details with the performer. One thread, one person, fewer things fall through the cracks.</p>"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "How far ahead should a chapter book live music?",
+      "a": "A few weeks to a couple months before your event is typical, especially during fall and spring formal season when demand is highest."
+    },
+    {
+      "q": "Does a solo acoustic act need a full sound system?",
+      "a": "Depends on the room — smaller spaces may just need an outlet, while larger rooms benefit from a house or portable PA. Confirm this with whoever you book."
+    },
+    {
+      "q": "Who should be the point of contact with the performer?",
+      "a": "One person — a social chair or programming board member — handling date, timing, and load-in details keeps logistics from getting lost between multiple people."
+    }
+  ],
+  "breadcrumb": [
+    { "name": "Booking", "path": "/booking/" },
+    { "name": "Booking Live Music for a College Event", "path": "/booking/booking-live-music-for-a-college-event/" }
+  ],
+  "datePublished": "2026-08-07",
+  "relatedPath": "/booking/college-events/",
+  "relatedLabel": "Book Conor for your college event"
+}

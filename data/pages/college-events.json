@@ -1,0 +1,48 @@
+{
+  "path": "/booking/college-events/",
+  "title": "College Event Booking Near Pittsburgh — Book Conor Pederson",
+  "metaDescription": "Book Conor Pederson for fraternity and sorority formals, campus programming, and college events within about 100 miles of Pittsburgh. Live vocals and acoustic guitar across Pop, R&B, Country, and Hip-Hop.",
+  "kicker": "College & Campus Events",
+  "h1": "Live Music for Your Campus Event",
+  "heroImage": "/assets/img/about-stage.jpg",
+  "heroImageAlt": "Conor Pederson singing into a microphone at an outdoor daytime performance",
+  "intro": "<p class=\"about__lede reveal\">Conor books live sets for fraternity and sorority formals, socials, welcome week, tailgates, and general campus programming &mdash; solo vocals and acoustic guitar across Pop, R&amp;B, Country, Hip&#8209;Hop, and the songs your chapter already knows every word to. Available for campuses within about 100 miles of Pittsburgh.</p>",
+  "sections": [
+    {
+      "heading": "Formals, Socials & Campus Programming",
+      "body": "<p class=\"reveal\">Greek life formals and socials, welcome week, tailgates, homecoming, philanthropy events, campus activities board bookings &mdash; a solo acoustic act sets up fast, needs minimal space, and reads the room without a full band's logistics.</p>"
+    },
+    {
+      "heading": "Covers Your Crowd Actually Knows, Plus Originals",
+      "body": "<p class=\"reveal\">The set draws from Pop, R&amp;B, Country, Hip&#8209;Hop, and the classics alongside Conor's own released music &mdash; built for a crowd that wants to sing along, not sit through a set list they don't recognize.</p>"
+    },
+    {
+      "heading": "Campuses in Range",
+      "body": "<p class=\"reveal\">Home base is Pittsburgh, with bookings typically staying within about 100 miles &mdash; covering campuses across the Pittsburgh area, Washington County, out to Morgantown, West Virginia, and beyond. That's a service-area radius, not a list of past shows &mdash; reach out to check your campus.</p>"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "What kinds of college events does Conor play?",
+      "a": "Fraternity and sorority formals and socials, welcome week, tailgates, homecoming, philanthropy events, and campus activities board bookings."
+    },
+    {
+      "q": "Does he play originals or just covers?",
+      "a": "Both — his own released music alongside a wide covers range across Pop, R&B, Country, Hip-Hop, and the classics."
+    },
+    {
+      "q": "What's the service area for campus bookings?",
+      "a": "Roughly 100 miles of Pittsburgh — reach out with your campus and date and he'll confirm."
+    },
+    {
+      "q": "How does a chapter or campus org book him?",
+      "a": "Use the form on this page or email conorpedersonmusic@gmail.com with your event date, location, and organization name."
+    }
+  ],
+  "serviceType": "College Event Musician",
+  "breadcrumb": [
+    { "name": "Booking", "path": "/booking/" },
+    { "name": "College Events", "path": "/booking/college-events/" }
+  ],
+  "datePublished": "2026-08-07"
+}
