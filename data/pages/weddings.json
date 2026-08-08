@@ -1,0 +1,52 @@
+{
+  "path": "/booking/weddings/",
+  "title": "Wedding Musician Near Pittsburgh — Book Conor Pederson",
+  "metaDescription": "Live wedding music from Conor Pederson: vocals and acoustic guitar for ceremonies, cocktail hours, and receptions within about 100 miles of Pittsburgh. Direct booking, no marketplace fees.",
+  "kicker": "Weddings & Private Events",
+  "h1": "Live Music for Your Wedding Day",
+  "heroImage": "/assets/img/about-night.jpg",
+  "heroImageAlt": "Conor Pederson playing acoustic guitar outdoors under the moon",
+  "intro": "<p class=\"about__lede reveal\">Conor plays live for weddings and private events &mdash; vocals and acoustic guitar across Pop, R&amp;B, Country, Hip&#8209;Hop, and the classics, adaptable from a quiet ceremony processional to a reception that gets people dancing. He books within about 100 miles of Pittsburgh, direct, with no marketplace listing fee added to your quote.</p>",
+  "sections": [
+    {
+      "heading": "Ceremony, Cocktail Hour & Reception",
+      "body": "<p class=\"reveal\">One solo act can cover the whole day: a stripped-back processional and vows, a warm cocktail-hour set while your guests mingle, then a reception set that builds toward the songs everyone actually wants to dance to. No band changeover, no second vendor to coordinate.</p>"
+    },
+    {
+      "heading": "Service Area",
+      "body": "<p class=\"reveal\">Home base is Pittsburgh. Bookings typically stay within about 100 miles &mdash; the South Hills, North Hills, Washington and Westmoreland counties, plus Morgantown and Wheeling, West Virginia, and Youngstown, Ohio. Venue further out? Ask.</p>"
+    },
+    {
+      "heading": "Why Book Direct",
+      "body": "<p class=\"reveal\">Sites like GigSalad, The Bash, and WeddingWire are useful for browsing, but every booking through them carries a platform fee. Book Conor directly here and that fee disappears &mdash; and you're emailing the person who'll actually be playing your wedding, not a listing account.</p>"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "What does Conor play at a wedding?",
+      "a": "Solo vocals and acoustic guitar, spanning Pop, R&B, Country, Hip-Hop, and the classics — built to cover ceremony, cocktail hour, and reception without a band changeover."
+    },
+    {
+      "q": "How far will he travel?",
+      "a": "Most weddings stay within about 100 miles of Pittsburgh — the South Hills, North Hills, Washington and Westmoreland counties, Morgantown and Wheeling WV, and Youngstown OH. Ask about anything further out."
+    },
+    {
+      "q": "How do we book him?",
+      "a": "Use the form on this page or email conorpedersonmusic@gmail.com with your date, venue, and event type. You'll hear back directly from Conor."
+    },
+    {
+      "q": "Can he learn our first-dance song or take requests?",
+      "a": "Send your must-play list when you book — he'll work new material into the set for the songs that matter most to your day."
+    },
+    {
+      "q": "How far in advance should we book?",
+      "a": "As soon as you have a date. Popular wedding dates fill a venue's calendar well ahead of the event, so reaching out early is the safest move."
+    }
+  ],
+  "serviceType": "Wedding Musician",
+  "breadcrumb": [
+    { "name": "Booking", "path": "/booking/" },
+    { "name": "Weddings", "path": "/booking/weddings/" }
+  ],
+  "datePublished": "2026-08-07"
+}

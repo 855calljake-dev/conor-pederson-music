@@ -314,6 +314,8 @@ a.nav__cta:hover { background: var(--blue); color: var(--ink); transform: transl
 .booking__blurb p { max-width: 36ch; }
 .booking__blurb .booking__email { margin-top: 1.2rem; }
 .booking__email a { color: var(--blue-bright); text-decoration-color: var(--purple); }
+.booking__links { margin-top: 1.4rem; line-height: 2; }
+.booking__links a { color: var(--blue-bright); text-decoration-color: var(--purple); }
 @media (max-width: 820px) { .booking__grid { grid-template-columns: 1fr; } }
 
 .form { border: var(--edge); padding: 2rem; background: var(--ink-2); }
@@ -369,6 +371,58 @@ a.nav__cta:hover { background: var(--blue); color: var(--ink); transform: transl
 .footer__credit a:hover, .footer__credit a:focus-visible {
   color: var(--blue-bright); border-bottom-color: var(--blue-bright);
 }
+
+/* ============ SUB-PAGES (booking hub, vertical & guide pages) ============ */
+.crumbs {
+  display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;
+  font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.04em;
+  color: var(--muted); margin-bottom: 1.6rem;
+}
+.crumbs a { color: var(--muted); text-decoration: none; }
+.crumbs a:hover { color: var(--blue-bright); }
+.crumbs span[aria-current] { color: var(--paper); }
+
+.page-hero {
+  padding: clamp(6rem, 16vh, 9rem) clamp(1.25rem, 6vw, 6rem) clamp(2rem, 5vh, 3rem);
+  position: relative;
+}
+.page-hero__title {
+  font-family: var(--display); font-weight: 600; text-transform: uppercase;
+  font-size: clamp(2.4rem, 7vw, 4.4rem); line-height: 1.02; letter-spacing: 0.01em;
+  max-width: 20ch;
+}
+
+.page-content { padding-top: 0; }
+.page-content__photo {
+  border: var(--edge); box-shadow: 10px 10px 0 rgba(75,156,211,0.35);
+  margin-bottom: 2.4rem; max-width: 560px;
+}
+.page-content__photo img { width: 100%; }
+.page-content__h2 {
+  font-family: var(--display); font-weight: 600; text-transform: uppercase;
+  font-size: 1.5rem; letter-spacing: 0.02em; margin-top: 2.2rem; margin-bottom: 0.8rem;
+}
+
+.faq { background: var(--ink-2); }
+.faq__item { border-bottom: var(--edge); padding: 1.4rem 0; max-width: 62ch; }
+.faq__item:first-child { border-top: var(--edge); }
+.faq__q {
+  font-family: var(--display); font-weight: 500; text-transform: uppercase;
+  font-size: 1.05rem; letter-spacing: 0.02em; margin-bottom: 0.5rem;
+}
+.faq__a { color: var(--muted); }
+
+.hub__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.4rem; margin-top: 2.6rem; }
+.hub__card {
+  display: block; border: var(--edge); padding: 1.6rem; text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.hub__card:hover { transform: translate(-4px,-4px); box-shadow: 8px 8px 0 rgba(75,156,211,0.4); }
+.hub__card h3 {
+  font-family: var(--display); font-weight: 600; text-transform: uppercase;
+  font-size: 1.2rem; letter-spacing: 0.02em; margin-bottom: 0.5rem;
+}
+.hub__card p { color: var(--muted); font-size: 0.95rem; }
 
 /* ============ REVEALS ============ */
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }

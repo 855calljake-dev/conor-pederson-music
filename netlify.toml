@@ -41,3 +41,9 @@
   to = "/"
   status = 404
   force = true
+
+[[redirects]]
+  from = "/CLAIMS-TO-VERIFY.md"
+  to = "/"
+  status = 404
+  force = true
