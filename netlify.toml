@@ -41,3 +41,18 @@
   to = "/"
   status = 404
   force = true
+
+# Same reason as the two above: the ByTomorrow gateway files are internal docs
+# for agents working on this repo, and the publish dir is "." so without these
+# they would be served from the artist's own domain.
+[[redirects]]
+  from = "/CLAUDE.md"
+  to = "/"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/AGENTS.md"
+  to = "/"
+  status = 404
+  force = true
