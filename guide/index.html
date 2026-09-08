@@ -89,7 +89,12 @@ details>ul{padding-left:2.2rem}
 footer{margin-top:3.6rem;padding-top:1.6rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem;display:flex;flex-direction:column;gap:.5rem}
 footer .credit{margin-top:.7rem;font-family:var(--mono);font-size:.76rem;letter-spacing:.05em;opacity:.85}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.preferred-source{display:flex;flex-direction:column;gap:.6rem;align-items:flex-start;margin-top:.4rem}
+.preferred-source__label{margin:0}
 </style>
+<!-- Google Preferred Source button (ByTomorrow standing rule, 2026-09-07).
+     The script renders every <div google-add-preferred-source-btn> on the page. -->
+<script async src="https://news.google.com/swg/js/v1/publisher.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -245,6 +250,10 @@ footer .credit{margin-top:.7rem;font-family:var(--mono);font-size:.76rem;letter-
 <footer>
   <p><strong>Editor:</strong> <code>conorpedersonmusic.com/admin</code></p>
   <p>Anything you're unsure about, ask before you guess. Nothing here is fragile, but a quick question is faster than undoing something.</p>
+  <div class="preferred-source">
+    <p class="preferred-source__label mono">Get Conor's updates first in Google Search and News.</p>
+    <div google-add-preferred-source-btn data-theme="light"></div>
+  </div>
   <p class="credit">Site and guide by <a href="https://bytomorrow.ai" rel="noopener">ByTomorrow</a>.</p>
 </footer>
 
