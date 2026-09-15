@@ -14,6 +14,14 @@
       "city": "Franklin, TN",
       "ticket_label": "FREE",
       "ticket_url": ""
+    },
+    {
+      "ticket_label": "FREE",
+      "venue": "Voices Carry for Auberle (Charity Event)",
+      "city": "Pittsburgh, PA",
+      "ticket_url": "https://secure.qgiv.com/event/voicescarry2026/",
+      "date": "2026-10-06",
+      "time": "6:00 PM"
     }
   ]
 }
