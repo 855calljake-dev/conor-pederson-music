@@ -155,7 +155,14 @@ a.nav__cta:hover { background: var(--blue); color: var(--ink); transform: transl
   border-color: var(--blue-bright); color: var(--blue-bright); transform: translateY(-2px);
 }
 .hero__social svg { width: 20px; height: 20px; fill: currentColor; display: block; }
-.hero__actions { display: flex; gap: 1rem; margin-top: 1.1rem; flex-wrap: wrap; justify-content: center; }
+/* Equal-width buttons: the visual centre (the gap between them) then sits
+   on the geometric centre the icon row is aligned to. With one narrower
+   button the TikTok icon looked shifted right of the gap. */
+.hero__actions { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.1rem; }
+.hero__actions .btn { text-align: center; }
+@media (max-width: 560px) {
+  .hero__actions { grid-template-columns: 1fr; }
+}
 
 /* buttons */
 .btn {
