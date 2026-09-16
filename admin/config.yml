@@ -100,3 +100,12 @@ collections:
             fields:
               - { label: "Image", name: "image", widget: "image" }
               - { label: "Describe the photo", name: "alt", widget: "string" }
+          - label: "More photos"
+            name: "gallery"
+            widget: "list"
+            required: false
+            summary: "{{fields.alt}}"
+            hint: "Extra photos shown in a photo wall under the bio. Add as many as you like, drag to reorder, trash to remove. Each shows whole, no cropping."
+            fields:
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Describe the photo", name: "alt", widget: "string", hint: "A short plain description, e.g. Conor at the Thunderbird, June 2026" }

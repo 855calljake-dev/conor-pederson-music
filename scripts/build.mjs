@@ -334,7 +334,19 @@ if (about) {
         `    </figure>\n`
       : "") +
     `  </div>`;
-  html = replaceBetweenMarkers(html, "ABOUT", aboutHtml);
+  const gallery = (Array.isArray(about.gallery) ? about.gallery : []).filter((g) => g && g.image);
+  const galleryHtml = gallery.length
+    ? `\n  <div class="about__gallery">\n` +
+      gallery
+        .map(
+          (g) =>
+            `    <figure class="about__shot reveal">` +
+            `<img src="${esc(g.image)}" alt="${esc(g.alt)}" loading="lazy"></figure>\n`
+        )
+        .join("") +
+      `  </div>`
+    : "";
+  html = replaceBetweenMarkers(html, "ABOUT", aboutHtml + galleryHtml);
 } else {
   console.warn("build: WARNING data/about.json unavailable. About block left as-is.");
 }

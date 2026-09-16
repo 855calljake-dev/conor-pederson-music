@@ -12,5 +12,11 @@
   "photo_wide": {
     "image": "/assets/img/about-brick.jpg",
     "alt": "Conor Pederson on stage with acoustic guitar and sunglasses"
-  }
+  },
+  "gallery": [
+    {
+      "image": "/assets/img/about-stage.jpg",
+      "alt": "Conor Pederson on an outdoor festival stage with a microphone"
+    }
+  ]
 }

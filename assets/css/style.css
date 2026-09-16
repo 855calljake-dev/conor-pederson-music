@@ -253,8 +253,19 @@ a.nav__cta:hover { background: var(--blue); color: var(--ink); transform: transl
   color: var(--purple); border: 1px solid var(--purple);
   padding: 0.4rem 0.8rem; display: inline-block;
 }
+/* Photo wall (data/about.json "gallery"): CSS columns keep every photo at
+   its own aspect ratio, no cropping, and pack them like a contact sheet. */
+.about__gallery { columns: 3; column-gap: 1.4rem; margin-top: 2.4rem; }
+.about__shot { break-inside: avoid; margin: 0 0 1.4rem; border: var(--edge); background: var(--ink-3); }
+.about__shot:nth-child(odd) { box-shadow: 8px 8px 0 rgba(75,156,211,0.3); }
+.about__shot:nth-child(even) { box-shadow: 8px 8px 0 rgba(138,79,255,0.3); }
+.about__shot img { width: 100%; height: auto; display: block; }
+@media (max-width: 1024px) { .about__gallery { columns: 2; } }
 @media (max-width: 820px) {
   .about__grid { grid-template-columns: 1fr; grid-template-areas: "copy" "tall" "wide"; }
+  .about__gallery { margin-top: 1.6rem; column-gap: 0.9rem; }
+  .about__shot { margin-bottom: 0.9rem; }
+  .about__shot:nth-child(odd), .about__shot:nth-child(even) { box-shadow: 5px 5px 0 rgba(75,156,211,0.3); }
   .about__photo--tall { aspect-ratio: 3 / 4; max-width: 420px; }
 }
 

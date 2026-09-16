@@ -85,6 +85,7 @@ Videos play right on your page when someone presses play. They don't get sent of
 | Tag line | The small boxed label under the bio (`VOCALS + ACOUSTIC GUITAR`). Blank hides it. |
 | Portrait photo (left) | Upload a tall/upright photo. The site crops it to fit, keeping the top-middle in view, so photos where you're centred and not tiny work best. |
 | Wide photo (bottom right) | Upload a landscape photo. |
+| More photos | A photo wall under the bio. **Add More photos** for each one, drag to reorder, trash to remove. Every photo shows whole, no cropping. |
 | Describe the photo | A short plain description of each photo. It's read out by screen readers and read by search engines. |
 
 ## Changing or removing something
