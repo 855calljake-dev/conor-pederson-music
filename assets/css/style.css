@@ -497,29 +497,18 @@ body.has-expanded-video { overflow: hidden; }
 }
 
 /* Google Preferred Source button (rendered by publisher.js into the div) */
-/* Google "Add to Preferred Sources" card (ByTomorrow standing rule). Google
-   renders the button itself inside the [google-add-preferred-source-btn]
-   div; only its light/dark theme is ours to choose. The card around it is
-   what makes it read as a real call to action instead of a footnote. */
+/* Google "Add to Preferred Sources" (ByTomorrow standing rule). Google renders
+   the button itself inside the [google-add-preferred-source-btn] div; only its
+   light/dark theme is ours. Jake, 2026-09-16: keep it small, last thing in
+   the footer, below the ByTomorrow credit. */
 .preferred-source {
-  display: flex; flex-direction: column; align-items: center; gap: 0.45rem;
-  max-width: 560px; margin: 0 auto 2.2rem; padding: 1.6rem 1.5rem 1.5rem;
-  border: var(--edge); background: var(--ink-3); text-align: center;
-  box-shadow: 8px 8px 0 rgba(75,156,211,0.35), 16px 16px 0 rgba(138,79,255,0.22);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem 1rem;
+  margin-top: 1.6rem; padding-top: 1.2rem; border-top: var(--edge);
 }
-.preferred-source__kicker { color: var(--blue-bright); letter-spacing: 0.22em; text-transform: uppercase; font-size: 0.72rem; }
-.preferred-source__title {
-  font-family: var(--display); font-weight: 600; text-transform: uppercase;
-  font-size: clamp(1.4rem, 3.2vw, 1.9rem); line-height: 1.05; letter-spacing: 0.02em; color: #fff;
-}
-.preferred-source__label { color: var(--muted); font-size: 0.95rem; max-width: 40ch; margin-top: 0.15rem; }
-.preferred-source__btn { min-height: 44px; display: flex; align-items: center; justify-content: center; margin-top: 0.6rem; transform: scale(1.15); transform-origin: center; }
-.footer--slim { padding: 2.5rem clamp(1.25rem, 6vw, 6rem); }
-.footer--slim .preferred-source { margin-bottom: 0; }
-@media (max-width: 640px) {
-  .preferred-source { padding: 1.3rem 1rem 1.2rem; box-shadow: 6px 6px 0 rgba(75,156,211,0.35); }
-  .preferred-source__btn { transform: none; }
-}
+.preferred-source__label { color: var(--muted); font-size: 0.78rem; opacity: 0.85; }
+.preferred-source__btn { min-height: 40px; display: flex; align-items: center; transform: scale(0.85); transform-origin: center; }
+.footer--slim { padding: 2rem clamp(1.25rem, 6vw, 6rem); }
+.footer--slim .preferred-source { margin-top: 0; padding-top: 0; border-top: 0; }
 
 /* ============ REVEALS ============ */
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }

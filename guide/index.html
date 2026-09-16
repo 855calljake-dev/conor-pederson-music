@@ -89,10 +89,8 @@ details>ul{padding-left:2.2rem}
 footer{margin-top:3.6rem;padding-top:1.6rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem;display:flex;flex-direction:column;gap:.5rem}
 footer .credit{margin-top:.7rem;font-family:var(--mono);font-size:.76rem;letter-spacing:.05em;opacity:.85}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-.preferred-source{display:flex;flex-direction:column;gap:.35rem;align-items:flex-start;margin-top:1rem;padding:1.1rem 1.2rem;border:1px solid var(--line);border-radius:6px}
-.preferred-source__kicker{margin:0;font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase}
-.preferred-source__title{margin:0;font-size:1.1rem}
-.preferred-source__label{margin:0 0 .4rem}
+.preferred-source{display:flex;flex-wrap:wrap;gap:.4rem 1rem;align-items:center;margin-top:1rem;padding-top:.9rem;border-top:1px solid var(--line)}
+.preferred-source__label{margin:0;font-size:.82rem}
 </style>
 <!-- Google Preferred Source button (ByTomorrow standing rule, 2026-09-07).
      The script renders every <div google-add-preferred-source-btn> on the page. -->
@@ -299,13 +297,11 @@ footer .credit{margin-top:.7rem;font-family:var(--mono);font-size:.76rem;letter-
 <footer>
   <p><strong>Editor:</strong> <code>conorpedersonmusic.com/admin</code></p>
   <p>Anything you're unsure about, ask before you guess. Nothing here is fragile, but a quick question is faster than undoing something.</p>
+  <p class="credit">Site and guide by <a href="https://bytomorrow.ai" rel="noopener">ByTomorrow</a>.</p>
   <div class="preferred-source">
-    <p class="preferred-source__kicker">On Google</p>
-    <h3 class="preferred-source__title">Make Conor a preferred source</h3>
-    <p class="preferred-source__label">One tap. Then Conor's new shows and releases show up first when you search Google.</p>
+    <p class="preferred-source__label mono">Get Conor's shows and releases first on Google.</p>
     <div google-add-preferred-source-btn data-theme="light"></div>
   </div>
-  <p class="credit">Site and guide by <a href="https://bytomorrow.ai" rel="noopener">ByTomorrow</a>.</p>
 </footer>
 
 </main>
