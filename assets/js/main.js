@@ -101,6 +101,38 @@ function renderMusic(data) {
   observeReveals(grid);
 }
 
+/* ---------- videos (click-to-play YouTube) ----------
+   The two home-page videos are baked into index.html at build time from
+   data/videos.json (scripts/build.mjs), as a lightweight poster + play
+   button. Nothing from YouTube loads until the visitor clicks; then the
+   poster is swapped for the real player, in place, with autoplay. Without
+   JS the "Watch on YouTube" link under each video still works. */
+function playVideo(frame) {
+  var id = frame.getAttribute("data-video-id");
+  var title = frame.getAttribute("data-video-title") || "YouTube video";
+  if (!id) return;
+  var iframe = document.createElement("iframe");
+  iframe.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id) +
+    "?autoplay=1&rel=0&playsinline=1&modestbranding=1";
+  iframe.title = title;
+  iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen");
+  iframe.setAttribute("allowfullscreen", "");
+  iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+  frame.innerHTML = "";
+  frame.appendChild(iframe);
+  frame.classList.add("is-playing");
+  // The button that had focus is gone; keep keyboard users on the player.
+  iframe.setAttribute("tabindex", "-1");
+  iframe.focus();
+}
+function wireVideos() {
+  document.querySelectorAll(".video__frame").forEach(function (frame) {
+    var btn = frame.querySelector(".video__poster");
+    if (!btn) return;
+    btn.addEventListener("click", function () { playVideo(frame); });
+  });
+}
+
 /* Structured data (JSON-LD) is generated at build time, not here — see
    scripts/build.mjs. AI crawlers don't reliably execute client-side JS
    (SOP-AGENTIC-SEO-WEBSITES.md §3.1), so injecting it from this file would
@@ -129,6 +161,7 @@ if (typeof document !== "undefined") {
   document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("year").textContent = new Date().getFullYear();
     observeReveals(document);
+    wireVideos();
 
     fetch("/data/shows.json").then(function (r) { return r.json(); }).then(renderShows)
       .catch(function () { document.getElementById("shows-empty").hidden = false; });

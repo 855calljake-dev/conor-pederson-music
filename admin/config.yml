@@ -1,5 +1,5 @@
 # Decap CMS config — gives Conor a form-based editor at /admin
-# for shows and music. Edits are committed straight to the repo,
+# for shows, music, the two home-page videos, and the About section. Edits are committed straight to the repo,
 # which triggers a Netlify redeploy.
 #
 # SETUP (one-time, see README): replace REPO_PLACEHOLDER with the real
@@ -53,3 +53,50 @@ collections:
               - { label: "Smart link", name: "link", widget: "string", hint: "The ffm.to link (or Spotify/Apple link)" }
               - { label: "Artwork", name: "artwork", widget: "image" }
               - { label: "Featured", name: "featured", widget: "boolean", default: false, hint: "Only one release should be featured at a time" }
+      - name: "videos"
+        label: "Videos (home page)"
+        file: "data/videos.json"
+        description: "The two YouTube videos on the home page. Paste any YouTube link: the normal watch link, a youtu.be share link, or a Shorts link all work. The left video shows first on phones."
+        fields:
+          - { label: "Section heading", name: "heading", widget: "string", default: "Watch", hint: "The big title above the videos." }
+          - { label: "Intro line", name: "intro", widget: "text", required: false, hint: "One or two sentences under the heading. Leave blank to hide it." }
+          - label: "Left video"
+            name: "left"
+            widget: "object"
+            fields:
+              - { label: "YouTube link", name: "url", widget: "string", hint: "e.g. https://youtu.be/aldkBjVJ7qQ" }
+              - { label: "Title", name: "title", widget: "string", required: false, hint: "Shown under the video. Leave blank to use the title from YouTube." }
+              - { label: "Label", name: "label", widget: "string", required: false, hint: "Small tag above the title, e.g. Original, Cover, Live" }
+          - label: "Right video"
+            name: "right"
+            widget: "object"
+            fields:
+              - { label: "YouTube link", name: "url", widget: "string", hint: "e.g. https://youtu.be/xpjj2ZXiJt8" }
+              - { label: "Title", name: "title", widget: "string", required: false, hint: "Shown under the video. Leave blank to use the title from YouTube." }
+              - { label: "Label", name: "label", widget: "string", required: false, hint: "Small tag above the title, e.g. Original, Cover, Live" }
+      - name: "about"
+        label: "About section"
+        file: "data/about.json"
+        description: "The bio text and the two photos in the About section on the home page."
+        fields:
+          - { label: "Opening line", name: "lede", widget: "text", hint: "The big first sentence. One or two lines." }
+          - label: "Paragraphs"
+            name: "paragraphs"
+            widget: "list"
+            hint: "The rest of the bio, one paragraph per item. Add, remove, or reorder freely."
+            field: { label: "Paragraph", name: "paragraph", widget: "text" }
+          - { label: "Tag line", name: "tag", widget: "string", required: false, default: "VOCALS + ACOUSTIC GUITAR", hint: "The small boxed label under the bio. Leave blank to hide it." }
+          - label: "Portrait photo (left)"
+            name: "photo_tall"
+            widget: "object"
+            hint: "Tall photo. Upright/portrait orientation looks best, the site crops it to fit."
+            fields:
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Describe the photo", name: "alt", widget: "string", hint: "A short description for screen readers and search, e.g. Conor playing guitar at sunset" }
+          - label: "Wide photo (bottom right)"
+            name: "photo_wide"
+            widget: "object"
+            hint: "Landscape/wide photo."
+            fields:
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Describe the photo", name: "alt", widget: "string" }

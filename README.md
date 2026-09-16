@@ -1,13 +1,22 @@
 # Conor Pederson Music — conorpedersonmusic.com
 
-Official artist site for Conor Pederson. Static site, no build step, deployed on Netlify.
+Official artist site for Conor Pederson. Static site with one tiny prebuild step (`scripts/build.mjs`, plain Node, no deps), deployed on Netlify.
 Tenant slug: `conor-pederson-music`.
 
 ## Stack
 
 - Plain HTML/CSS/JS — `index.html` is the whole site; `thanks.html` is the form success page.
 - **Shows** and **Music** render from `data/shows.json` and `data/music.json` at page load.
-- **Decap CMS** at `/admin` gives Conor a form-based editor for both files (edits commit to
+- **About** (`data/about.json`) and the two home-page **Videos** (`data/videos.json`) are baked
+  into `index.html` at build time by `scripts/build.mjs`, between `BUILD:ABOUT` / `BUILD:VIDEOS`
+  marker comments, so the bio text and video markup are in the raw HTML for crawlers. The same
+  script bakes JSON-LD (incl. `VideoObject`), freshness dates, and og:image. Don't hand-edit
+  between markers; edit the JSON and run `node scripts/build.mjs`.
+- **Videos** are click-to-play: a YouTube poster image + play button; `main.js` swaps in the
+  `youtube-nocookie.com` player on click. Nothing from YouTube loads until then. Any YouTube link
+  shape works (`youtu.be/ID`, `watch?v=ID`, `shorts/ID`, `embed/ID`, or a bare ID); a blank title
+  is filled from YouTube oEmbed at build time (best-effort, never fails the build).
+- **Decap CMS** at `/admin` gives Conor a form-based editor for all four files (edits commit to
   this repo, which triggers a Netlify redeploy).
 - **Netlify Forms** handles the booking form (`name="booking"`), no server needed.
 - Fonts are self-hosted (`assets/fonts/`, via Fontsource) — no third-party font requests.
@@ -50,10 +59,14 @@ Go to **conorpedersonmusic.com/admin**, log in with GitHub.
   after their month ends.
 - **Music** → add a release: title, type, release date, the ffm.to smart link, artwork upload.
   Tick **Featured** on the new one and untick it on the previous one.
+- **Videos (home page)** → paste a YouTube link into **Left video** / **Right video**. Optional
+  title and label (Original / Cover). Heading + intro line above them are editable too.
+- **About section** → opening line, paragraphs (list), tag line, portrait photo, wide photo.
 
 ## Later (already structured for it)
 
-- **Merch** and **Videos**: add `data/merch.json` / `data/videos.json`, a section in
-  `index.html`, a render function in `main.js`, and a collection in `admin/config.yml` —
-  same pattern as shows/music.
+- **Merch**: add `data/merch.json`, a section in `index.html`, a render function in
+  `main.js`, and a collection in `admin/config.yml`, the same pattern as shows/music.
+- **More than two videos**: `data/videos.json` is two named slots on purpose (Conor asked for
+  left/right). Turning it into a list is a small change in `admin/config.yml` + `build.mjs`.
 - **Finnmax**: bio mention goes in the About section once the news is public.

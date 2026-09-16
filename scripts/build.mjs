@@ -10,6 +10,12 @@
  * sees exactly what a browser sees. Netlify runs this on every deploy
  * (netlify.toml [build] command) — including every Decap CMS save, since
  * a save is a commit and a commit triggers a redeploy.
+ *
+ * It also bakes two CMS-editable blocks of page content for the same reason:
+ *   - the About section (data/about.json)  → BUILD:ABOUT markers
+ *   - the two home-page YouTube videos (data/videos.json) → BUILD:VIDEOS markers
+ * Both used to be (or would otherwise be) static HTML / client-rendered; baking
+ * them keeps Conor's edits in the raw response and out of hand-edited HTML.
  */
 
 import { readFileSync, writeFileSync } from "node:fs";
@@ -79,6 +85,72 @@ function replaceMetaContent(html, propertyOrName, attr, value) {
   return html.replace(re, `$1${value}$2`);
 }
 
+function esc(v) {
+  return String(v == null ? "" : v).replace(/[&<>"']/g, (c) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+  })[c]);
+}
+
+function readJson(path, fallback) {
+  try {
+    return JSON.parse(readFileSync(path, "utf8"));
+  } catch (err) {
+    // A missing/invalid optional data file must not take the whole deploy down,
+    // but it must be visible in the build log (house rule: failures are recorded).
+    console.warn(`build: WARNING could not read ${path}: ${err.message}. Using fallback.`);
+    return fallback;
+  }
+}
+
+/* Accepts every link shape Conor is likely to paste from YouTube:
+ *   https://youtu.be/ID?si=...      https://www.youtube.com/watch?v=ID
+ *   https://youtube.com/shorts/ID   https://www.youtube.com/embed/ID
+ *   https://www.youtube.com/live/ID  or just the bare 11-char ID.
+ * Returns "" when nothing usable is found. */
+function youtubeId(input) {
+  const str = String(input || "").trim();
+  if (/^[A-Za-z0-9_-]{11}$/.test(str)) return str;
+  const m = /(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:watch\?(?:[^#]*&)?v=|shorts\/|embed\/|live\/|v\/))([A-Za-z0-9_-]{11})/.exec(str);
+  return m ? m[1] : "";
+}
+
+/* Title fallback + best available thumbnail, via YouTube's public oEmbed.
+ * Network is best-effort: any failure falls back to what's in the JSON and
+ * the always-present hqdefault thumbnail, and the build still succeeds. */
+async function youtubeMeta(id) {
+  const out = { title: "", thumb: `https://i.ytimg.com/vi/${id}/hqdefault.jpg` };
+  if (!id || typeof fetch !== "function") return out;
+  const withTimeout = (ms) => {
+    const c = new AbortController();
+    const t = setTimeout(() => c.abort(), ms);
+    return { signal: c.signal, done: () => clearTimeout(t) };
+  };
+  try {
+    const t = withTimeout(5000);
+    const r = await fetch(
+      `https://www.youtube.com/oembed?url=${encodeURIComponent("https://www.youtube.com/watch?v=" + id)}&format=json`,
+      { signal: t.signal }
+    );
+    t.done();
+    if (r.ok) {
+      const j = await r.json();
+      if (j && j.title) out.title = String(j.title);
+    }
+  } catch (err) {
+    console.warn(`build: WARNING oEmbed lookup failed for ${id}: ${err.message}`);
+  }
+  try {
+    const t = withTimeout(5000);
+    const maxres = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+    const r = await fetch(maxres, { method: "HEAD", signal: t.signal });
+    t.done();
+    if (r.ok) out.thumb = maxres;
+  } catch {
+    // keep hqdefault
+  }
+  return out;
+}
+
 const shows = JSON.parse(readFileSync("data/shows.json", "utf8")).shows || [];
 const releases = JSON.parse(readFileSync("data/music.json", "utf8")).releases || [];
 
@@ -89,7 +161,15 @@ const visibleShows = shows
 const sortedReleases = releases.slice().sort((a, b) => (a.released > b.released ? -1 : 1));
 const featured = releases.find((r) => r.featured) || sortedReleases[0];
 
-const dateModifiedISO = lastModifiedISO(["data/shows.json", "data/music.json"]);
+const about = readJson("data/about.json", null);
+const videosData = readJson("data/videos.json", null);
+
+const dateModifiedISO = lastModifiedISO([
+  "data/shows.json",
+  "data/music.json",
+  "data/about.json",
+  "data/videos.json",
+]);
 const dateModified = dateModifiedISO.slice(0, 10);
 
 let html = readFileSync("index.html", "utf8");
@@ -100,6 +180,30 @@ const footerMatch = html.match(/class="footer__social"[\s\S]*?<\/nav>/);
 const socialLinks = footerMatch
   ? [...footerMatch[0].matchAll(/href="(https?:\/\/[^"]+)"/g)].map((m) => m[1])
   : [];
+
+/* ---- videos: resolve IDs + metadata (top-level await; this is an ES module) ---- */
+const videoSlots = [];
+if (videosData) {
+  for (const key of ["left", "right"]) {
+    const slot = videosData[key] || {};
+    const id = youtubeId(slot.url);
+    if (!id) {
+      if (slot.url) console.warn(`build: WARNING ${key} video link not recognised as YouTube: ${slot.url}`);
+      continue;
+    }
+    const meta = await youtubeMeta(id);
+    videoSlots.push({
+      key,
+      id,
+      label: String(slot.label || "").trim(),
+      title: String(slot.title || "").trim() || meta.title || "Watch on YouTube",
+      thumb: meta.thumb,
+      watchUrl: `https://www.youtube.com/watch?v=${id}`,
+      embedUrl: `https://www.youtube-nocookie.com/embed/${id}`,
+      date: String(slot.date || "").trim(),
+    });
+  }
+}
 
 function artistRef() {
   return { "@type": "MusicGroup", "@id": SITE + "#artist", name: ARTIST, url: SITE };
@@ -159,6 +263,16 @@ const graph = [
       offers,
     };
   }),
+  ...videoSlots.map((v) => ({
+    "@type": "VideoObject",
+    name: v.title,
+    description: (v.label ? v.label + ": " : "") + ARTIST + ", live acoustic performance.",
+    thumbnailUrl: [v.thumb],
+    contentUrl: v.watchUrl,
+    embedUrl: v.embedUrl,
+    ...(v.date ? { uploadDate: v.date } : {}),
+    creator: artistRef(),
+  })),
   ...sortedReleases.map((r) => ({
     "@type": /album|ep/i.test(r.type || "") ? "MusicAlbum" : "MusicRecording",
     name: r.title,
@@ -172,7 +286,12 @@ const graph = [
 // No BreadcrumbList: this site has one indexable page (sitemap.xml), so
 // there is no crumb trail to show. No FAQPage: no FAQ content exists on
 // the page. Both are genuinely N/A here, not silently skipped.
-const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@graph": graph }, null, 2);
+// JSON.stringify does not escape "<", and the HTML parser ends a <script>
+// element on a literal "</script" even inside a JSON string. Every CMS text
+// field (venue, title, label, oEmbed title) flows into this block, so escape
+// "<" as \u003c: still valid JSON, can never terminate the script element.
+const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@graph": graph }, null, 2)
+  .replace(/</g, "\\u003c");
 
 html = replaceBetweenMarkers(
   html,
@@ -187,6 +306,69 @@ html = replaceBetweenMarkers(
     `<meta property="article:modified_time" content="${dateModified}">`
 );
 
+/* ---- About section ---- */
+if (about) {
+  const paragraphs = Array.isArray(about.paragraphs) ? about.paragraphs : [];
+  const tall = about.photo_tall || {};
+  const wide = about.photo_wide || {};
+  const aboutHtml =
+    `  <div class="about__grid">\n` +
+    (tall.image
+      ? `    <figure class="about__photo about__photo--tall reveal">\n` +
+        `      <img src="${esc(tall.image)}" alt="${esc(tall.alt)}" loading="lazy">\n` +
+        `    </figure>\n`
+      : "") +
+    `    <div class="about__copy">\n` +
+    (about.lede ? `      <p class="about__lede reveal">${esc(about.lede)}</p>\n` : "") +
+    paragraphs
+      .filter((t) => String(t || "").trim())
+      .map((t) => `      <p class="reveal">${esc(t)}</p>\n`)
+      .join("") +
+    (about.tag ? `      <p class="about__tag reveal"><span class="mono">${esc(about.tag)}</span></p>\n` : "") +
+    `    </div>\n` +
+    (wide.image
+      ? `    <figure class="about__photo about__photo--wide reveal">\n` +
+        `      <img src="${esc(wide.image)}" alt="${esc(wide.alt)}" loading="lazy">\n` +
+        `    </figure>\n`
+      : "") +
+    `  </div>`;
+  html = replaceBetweenMarkers(html, "ABOUT", aboutHtml);
+} else {
+  console.warn("build: WARNING data/about.json unavailable. About block left as-is.");
+}
+
+/* ---- Watch section (two click-to-play YouTube posters) ---- */
+{
+  const heading = (videosData && videosData.heading) || "Watch";
+  const intro = (videosData && videosData.intro) || "";
+  const cards = videoSlots
+    .map(
+      (v) =>
+        `    <article class="video reveal">\n` +
+        `      <div class="video__frame" data-video-id="${esc(v.id)}" data-video-title="${esc(v.title)}">\n` +
+        `        <button class="video__poster" type="button" aria-label="Play: ${esc(v.title)}">\n` +
+        `          <img src="${esc(v.thumb)}" alt="" loading="lazy" width="1280" height="720">\n` +
+        `          <span class="video__play" aria-hidden="true"></span>\n` +
+        `        </button>\n` +
+        `      </div>\n` +
+        `      <div class="video__body">\n` +
+        (v.label ? `        <p class="video__kicker">${esc(v.label)}</p>\n` : "") +
+        `        <h3 class="video__title">${esc(v.title)}</h3>\n` +
+        `        <a class="video__link mono" href="${esc(v.watchUrl)}" target="_blank" rel="noopener">Watch on YouTube</a>\n` +
+        `      </div>\n` +
+        `    </article>`
+    )
+    .join("\n");
+  const watchHtml =
+    `  <div class="section__head reveal">\n` +
+    `    <span class="section__num">02</span>\n` +
+    `    <h2 class="section__title">${esc(heading)}</h2>\n` +
+    `  </div>\n` +
+    (intro ? `  <p class="watch__intro reveal">${esc(intro)}</p>\n` : "") +
+    `  <div class="watch__grid">\n${cards}\n  </div>`;
+  html = replaceBetweenMarkers(html, "VIDEOS", watchHtml);
+}
+
 if (featured) {
   const artUrl = abs(featured.artwork);
   const altText = `${featured.title} artwork`;
@@ -200,5 +382,6 @@ writeFileSync("index.html", html);
 console.log(
   `build: og:image -> ${featured ? abs(featured.artwork) : "(no releases)"}, ` +
     `dateModified -> ${dateModified}, ${visibleShows.length} visible show(s), ` +
-    `${sortedReleases.length} release(s) in JSON-LD`
+    `${sortedReleases.length} release(s), ${videoSlots.length} video(s) in JSON-LD, ` +
+    `about: ${about ? "baked" : "SKIPPED"}`
 );
