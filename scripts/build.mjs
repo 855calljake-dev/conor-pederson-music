@@ -18,8 +18,9 @@
  * them keeps Conor's edits in the raw response and out of hand-edited HTML.
  */
 
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { execSync } from "node:child_process";
+import { createHash } from "node:crypto";
 
 const SITE = "https://conorpedersonmusic.com";
 const ARTIST = "Conor Pederson";
@@ -377,7 +378,34 @@ if (featured) {
   html = replaceMetaContent(html, "twitter:image", "name", artUrl);
 }
 
+/* ---- Cache-busting for CSS/JS ----
+ * Cloudflare fronts this site and hands browsers `max-age=14400` on static
+ * assets, while the HTML itself is never cached. Without this, every deploy
+ * that changes style.css or main.js ships new HTML against a stylesheet the
+ * visitor's browser cached up to four hours earlier (2026-09-16: the hero
+ * social icons rendered at full width because the new .hero__social rules
+ * had not reached the browser yet). A content-hash query string gives each
+ * version its own URL, so new HTML always pulls matching assets. */
+const BUSTED_ASSETS = ["/assets/css/fonts.css", "/assets/css/style.css", "/assets/js/main.js"];
+function bustAssets(source) {
+  let out = source;
+  for (const asset of BUSTED_ASSETS) {
+    const file = asset.slice(1);
+    if (!existsSync(file)) continue;
+    const hash = createHash("md5").update(readFileSync(file)).digest("hex").slice(0, 10);
+    const re = new RegExp(`((?:href|src)=")${asset.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?:\\?v=[^"]*)?(")`, "g");
+    out = out.replace(re, `$1${asset}?v=${hash}$2`);
+  }
+  return out;
+}
+html = bustAssets(html);
 writeFileSync("index.html", html);
+for (const page of ["thanks.html", "404.html"]) {
+  if (!existsSync(page)) continue;
+  const src = readFileSync(page, "utf8");
+  const busted = bustAssets(src);
+  if (busted !== src) writeFileSync(page, busted);
+}
 
 console.log(
   `build: og:image -> ${featured ? abs(featured.artwork) : "(no releases)"}, ` +
