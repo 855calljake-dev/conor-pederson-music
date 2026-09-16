@@ -391,7 +391,16 @@ if (featured) {
  * social icons rendered at full width because the new .hero__social rules
  * had not reached the browser yet). A content-hash query string gives each
  * version its own URL, so new HTML always pulls matching assets. */
-const BUSTED_ASSETS = ["/assets/css/fonts.css", "/assets/css/style.css", "/assets/js/main.js"];
+const BUSTED_ASSETS = [
+  "/assets/css/fonts.css",
+  "/assets/css/style.css",
+  "/assets/js/main.js",
+  // Icons too: browsers and Cloudflare both hold on to an old favicon.
+  "/favicon.ico",
+  "/assets/img/favicon-32.png",
+  "/assets/img/icon-192.png",
+  "/assets/img/apple-touch-icon.png",
+];
 function bustAssets(source) {
   let out = source;
   for (const asset of BUSTED_ASSETS) {

@@ -232,17 +232,15 @@ a.nav__cta:hover { background: var(--blue); color: var(--ink); transform: transl
 /* The tall frame stretches to the height of the copy + wide photo, so the
    portrait always gets cropped. Anchor the crop on the subject (upper-middle,
    slightly right) instead of dead centre so the face never leaves the frame. */
-.about__photo--tall img { object-position: 55% 40%; }
-/* The wide frame needs a DEFINITE height, not just a max-height: with an
-   auto-height box the img's height:100% resolves to auto, so it renders at
-   natural size and gets clipped from the top (a band of brick and the top
-   of Conor's head at tablet/desktop widths). aspect-ratio + max-height
-   gives a real height, so object-fit can crop around the face instead. */
+.about__photo--tall img { object-position: 60% 40%; }
+/* The wide photo is never cropped (Jake, 2026-09-16: the whole guitar and
+   shirt must stay visible at every width). It renders at its own aspect
+   ratio, full column width; whatever Conor uploads shows entire. */
 .about__photo--wide {
-  grid-area: wide; aspect-ratio: 16 / 9; max-height: 340px; width: 100%;
-  overflow: hidden; border: var(--edge); box-shadow: -10px 10px 0 rgba(138,79,255,0.35);
+  grid-area: wide; width: 100%; align-self: start;
+  border: var(--edge); box-shadow: -10px 10px 0 rgba(138,79,255,0.35);
 }
-.about__photo--wide img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+.about__photo--wide img { width: 100%; height: auto; object-fit: initial; }
 .about__copy { grid-area: copy; max-width: 62ch; }
 .about__copy p + p { margin-top: 1.1rem; }
 .about__lede {
