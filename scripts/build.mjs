@@ -231,6 +231,7 @@ const graph = [
     name: ARTIST,
     url: SITE,
     ...(featured ? { image: abs(featured.artwork) } : {}),
+    logo: SITE + "/assets/img/cp-logo-512.png",
     genre: ["R&B", "Pop", "Hip-Hop"],
     sameAs: socialLinks,
   },
@@ -351,11 +352,15 @@ if (about) {
         `          <img src="${esc(v.thumb)}" alt="" loading="lazy" width="1280" height="720">\n` +
         `          <span class="video__play" aria-hidden="true"></span>\n` +
         `        </button>\n` +
+        `        <button class="video__close" type="button" aria-label="Close full screen">&times;</button>\n` +
         `      </div>\n` +
         `      <div class="video__body">\n` +
         (v.label ? `        <p class="video__kicker">${esc(v.label)}</p>\n` : "") +
         `        <h3 class="video__title">${esc(v.title)}</h3>\n` +
-        `        <a class="video__link mono" href="${esc(v.watchUrl)}" target="_blank" rel="noopener">Watch on YouTube</a>\n` +
+        `        <div class="video__tools">\n` +
+        `          <button class="video__expand" type="button" aria-label="Expand ${esc(v.title)} to full screen">Expand</button>\n` +
+        `          <a class="video__link mono" href="${esc(v.watchUrl)}" target="_blank" rel="noopener">Watch on YouTube</a>\n` +
+        `        </div>\n` +
         `      </div>\n` +
         `    </article>`
     )

@@ -65,12 +65,12 @@ a { color: inherit; }
   padding: 1rem 1.5rem;
   background: linear-gradient(rgba(8,8,13,0.85), transparent);
 }
-.nav__brand {
-  font-family: var(--display); font-weight: 700; font-size: 1.5rem;
-  text-decoration: none; letter-spacing: 0.05em;
-  color: #fff;
-  text-shadow: 2px 2px 0 var(--purple), 4px 4px 0 var(--blue);
-}
+/* Conor's CP monogram (assets/img/cp-mark.png): white mark with the same
+   purple + blue hard-shadow offsets the old text brand used, baked into the
+   PNG so it reads over the hero photo. */
+.nav__brand { display: block; line-height: 0; text-decoration: none; transition: transform 0.15s; }
+.nav__brand img { width: 44px; height: 44px; display: block; }
+.nav__brand:hover, .nav__brand:focus-visible { transform: translateY(-2px); }
 .nav__links { display: flex; gap: 1.6rem; align-items: center; }
 .nav__links a {
   font-family: var(--display); font-weight: 500;
@@ -141,7 +141,10 @@ a.nav__cta:hover { background: var(--blue); color: var(--ink); transform: transl
   -webkit-text-stroke: 2.5px var(--blue);
   text-shadow: 6px 6px 0 rgba(138,79,255,0.55);
 }
-.hero__social { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
+/* Icons + the two CTAs share a shrink-wrapped column, so the icon row is
+   centred over exactly the width of the buttons rather than the hero. */
+.hero__ctas { display: inline-flex; flex-direction: column; align-items: center; margin-top: 1.5rem; }
+.hero__social { display: flex; gap: 0.75rem; justify-content: center; }
 .hero__social a {
   display: inline-flex; align-items: center; justify-content: center;
   width: 44px; height: 44px;
@@ -152,7 +155,7 @@ a.nav__cta:hover { background: var(--blue); color: var(--ink); transform: transl
   border-color: var(--blue-bright); color: var(--blue-bright); transform: translateY(-2px);
 }
 .hero__social svg { width: 20px; height: 20px; fill: currentColor; display: block; }
-.hero__actions { display: flex; gap: 1rem; margin-top: 1.4rem; flex-wrap: wrap; }
+.hero__actions { display: flex; gap: 1rem; margin-top: 1.1rem; flex-wrap: wrap; justify-content: center; }
 
 /* buttons */
 .btn {
@@ -223,8 +226,16 @@ a.nav__cta:hover { background: var(--blue); color: var(--ink); transform: transl
    portrait always gets cropped. Anchor the crop on the subject (upper-middle,
    slightly right) instead of dead centre so the face never leaves the frame. */
 .about__photo--tall img { object-position: 55% 40%; }
-.about__photo--wide { grid-area: wide; max-height: 340px; overflow: hidden; border: var(--edge); box-shadow: -10px 10px 0 rgba(138,79,255,0.35); }
-.about__photo--wide img { object-position: center 35%; }
+/* The wide frame needs a DEFINITE height, not just a max-height: with an
+   auto-height box the img's height:100% resolves to auto, so it renders at
+   natural size and gets clipped from the top (a band of brick and the top
+   of Conor's head at tablet/desktop widths). aspect-ratio + max-height
+   gives a real height, so object-fit can crop around the face instead. */
+.about__photo--wide {
+  grid-area: wide; aspect-ratio: 16 / 9; max-height: 340px; width: 100%;
+  overflow: hidden; border: var(--edge); box-shadow: -10px 10px 0 rgba(138,79,255,0.35);
+}
+.about__photo--wide img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
 .about__copy { grid-area: copy; max-width: 62ch; }
 .about__copy p + p { margin-top: 1.1rem; }
 .about__lede {
@@ -278,10 +289,51 @@ a.nav__cta:hover { background: var(--blue); color: var(--ink); transform: transl
 .video__link { color: var(--blue-bright); text-decoration: none; text-transform: uppercase; display: inline-block; margin-top: 0.7rem; font-size: 0.75rem; letter-spacing: 0.15em; }
 .video__link::after { content: " →"; }
 .video__link:hover { color: #fff; }
+/* Expand: the frame lifts out of the tile to fill the viewport; the iframe
+   never moves in the DOM, so playback carries on uninterrupted. */
+.video__tools { display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; margin-top: 0.7rem; }
+.video__expand {
+  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--paper); background: transparent; border: 1px solid rgba(255,255,255,0.3);
+  padding: 0.35rem 0.7rem; cursor: pointer; transition: border-color 0.2s, color 0.2s;
+}
+.video__expand:hover, .video__expand:focus-visible { border-color: var(--blue-bright); color: var(--blue-bright); }
+.video__expand::before { content: "⤢ "; }
+.video__close { display: none; }
+/* A transformed ancestor becomes the containing block for position:fixed,
+   and .reveal animates transform. Clear it while expanded so the frame can
+   really reach the viewport, whatever state the reveal is in. */
+.video--expanded { transform: none !important; transition: none; }
+.video--expanded .video__frame {
+  position: fixed; inset: 0; z-index: 10000; aspect-ratio: auto;
+  background: #000; display: flex; align-items: center; justify-content: center;
+}
+.video--expanded .video__frame iframe, .video--expanded .video__poster {
+  position: relative; inset: auto;
+  width: min(100vw, calc(100vh * 16 / 9)); height: min(100vh, calc(100vw * 9 / 16));
+}
+.video--expanded .video__close {
+  display: flex; align-items: center; justify-content: center;
+  position: fixed; top: max(0.75rem, env(safe-area-inset-top)); right: max(0.75rem, env(safe-area-inset-right));
+  z-index: 10001; width: 44px; height: 44px; border: 2px solid rgba(255,255,255,0.5);
+  background: rgba(8,8,13,0.7); color: #fff; font-size: 1.4rem; line-height: 1; cursor: pointer;
+}
+.video--expanded .video__close:hover, .video--expanded .video__close:focus-visible { border-color: var(--blue-bright); color: var(--blue-bright); }
+body.has-expanded-video { overflow: hidden; }
+
+/* Phones: keep the two videos side by side, just smaller. */
 @media (max-width: 820px) {
-  .watch__grid { grid-template-columns: 1fr; gap: 2rem; }
-  .video:nth-child(even) { box-shadow: 8px 8px 0 rgba(138,79,255,0.35); }
-  .video:nth-child(odd) { box-shadow: 8px 8px 0 rgba(75,156,211,0.35); }
+  .watch__grid { grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+  .video:nth-child(even) { box-shadow: 5px 5px 0 rgba(138,79,255,0.35); }
+  .video:nth-child(odd) { box-shadow: 5px 5px 0 rgba(75,156,211,0.35); }
+  .video__play { width: 46px; height: 32px; box-shadow: 3px 3px 0 rgba(255,255,255,0.15); }
+  .video__play::after { border-width: 7px 0 7px 12px; margin-left: 3px; }
+  .video__body { padding: 0.7rem 0.75rem 0.85rem; }
+  .video__kicker { font-size: 0.62rem; letter-spacing: 0.15em; }
+  .video__title { font-size: 0.95rem; }
+  .video__link { font-size: 0.62rem; letter-spacing: 0.1em; }
+  .video__expand { font-size: 0.62rem; padding: 0.3rem 0.5rem; }
+  .watch__intro { font-size: 0.95rem; margin-bottom: 1.6rem; }
 }
 
 /* ============ SHOWS ============ */

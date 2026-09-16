@@ -125,11 +125,40 @@ function playVideo(frame) {
   iframe.setAttribute("tabindex", "-1");
   iframe.focus();
 }
+/* Expand lifts the frame to fill the viewport (CSS .video--expanded); the
+   iframe stays where it is in the DOM so playback is not interrupted.
+   YouTube's own full-screen button still works too (allowfullscreen). */
+function setExpanded(card, on) {
+  var frame = card.querySelector(".video__frame");
+  var expandBtn = card.querySelector(".video__expand");
+  card.classList.toggle("video--expanded", on);
+  document.body.classList.toggle("has-expanded-video", on);
+  if (expandBtn) expandBtn.textContent = on ? "Shrink" : "Expand";
+  if (on) {
+    if (!frame.classList.contains("is-playing")) playVideo(frame);
+    var close = card.querySelector(".video__close");
+    if (close) close.focus();
+  } else if (expandBtn) {
+    expandBtn.focus();
+  }
+}
 function wireVideos() {
-  document.querySelectorAll(".video__frame").forEach(function (frame) {
-    var btn = frame.querySelector(".video__poster");
-    if (!btn) return;
-    btn.addEventListener("click", function () { playVideo(frame); });
+  document.querySelectorAll(".video").forEach(function (card) {
+    var frame = card.querySelector(".video__frame");
+    if (!frame) return;
+    var poster = frame.querySelector(".video__poster");
+    if (poster) poster.addEventListener("click", function () { playVideo(frame); });
+    var expand = card.querySelector(".video__expand");
+    if (expand) expand.addEventListener("click", function () {
+      setExpanded(card, !card.classList.contains("video--expanded"));
+    });
+    var close = card.querySelector(".video__close");
+    if (close) close.addEventListener("click", function () { setExpanded(card, false); });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return;
+    var open = document.querySelector(".video--expanded");
+    if (open) setExpanded(open, false);
   });
 }
 

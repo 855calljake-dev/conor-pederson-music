@@ -72,7 +72,7 @@ old one. Two featured releases makes the top of the page render wrong.
 
 **Section heading** and **Intro line** are the text above the two videos. **Save** and the new video is live in about a minute.
 
-Videos play right on your page when someone presses play. They don't get sent off to YouTube.
+Videos play right on your page when someone presses play. They don't get sent off to YouTube. On a phone the two sit side by side, and an **Expand** button under each one takes it full screen.
 
 ## Editing your About section
 
