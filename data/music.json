@@ -31,6 +31,14 @@
       "link": "https://ffm.to/ajy9k8v",
       "artwork": "/assets/img/art-be-who-you-be.jpg",
       "featured": false
+    },
+    {
+      "featured": true,
+      "link": "https://ffm.to/into-your-veins-single",
+      "released": "2026-09-18",
+      "type": "Single",
+      "title": "Into Your Veins",
+      "artwork": "/assets/img/iyv-cover-art.jpeg"
     }
   ]
 }
