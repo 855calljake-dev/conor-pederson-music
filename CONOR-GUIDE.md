@@ -54,7 +54,7 @@ same place.
 | Type | Single, EP, or Album. |
 | Release date | The day it drops. Sorts the catalog, newest first. |
 | Smart link | The `ffm.to` link, or Spotify/Apple. |
-| Artwork | The cover. Square, as large as you have it. |
+| Artwork | The cover. Square, as large as you have it. Uploading is two clicks: **Choose an image**, upload or find your file, then click the file so it is highlighted and press **Choose selected**. If the field still shows a different picture, it picked the wrong one; click **Choose different image** and select yours. |
 | Featured | Tick for the release in the big spotlight. |
 
 **Only one release can be featured at a time.** Tick Featured on the new drop, untick it on the
