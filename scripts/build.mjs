@@ -152,6 +152,22 @@ async function youtubeMeta(id) {
   return out;
 }
 
+/* Version a repo-relative image path with a content hash (?v=), same idea as
+ * bustAssets() below. Why this exists (2026-09-19): Conor uploaded new single
+ * artwork through the CMS; a request for the new URL raced the deploy, Netlify
+ * answered 404, and Cloudflare cached that 404 under our own week-long
+ * /assets/img/ Cache-Control. Netlify had the file within a minute; visitors got
+ * the cached 404 for as long as nobody purged it. A content-hashed URL is one the
+ * cache has never seen, so a re-upload or a re-pick can never inherit a stale
+ * entry. Local paths only; absolute URLs pass through untouched. */
+function versionedImage(path) {
+  if (!path || /^https?:\/\//.test(path)) return path;
+  const file = path.replace(/^\//, "").split("?")[0];
+  if (!existsSync(file)) return path;
+  const h = createHash("md5").update(readFileSync(file)).digest("hex").slice(0, 10);
+  return "/" + file + "?v=" + h;
+}
+
 const shows = JSON.parse(readFileSync("data/shows.json", "utf8")).shows || [];
 const releases = JSON.parse(readFileSync("data/music.json", "utf8")).releases || [];
 
@@ -222,7 +238,7 @@ const graph = [
     datePublished: DATE_PUBLISHED,
     dateModified,
     ...(featured
-      ? { primaryImageOfPage: { "@type": "ImageObject", url: abs(featured.artwork) } }
+      ? { primaryImageOfPage: { "@type": "ImageObject", url: abs(versionedImage(featured.artwork)) } }
       : {}),
   },
   {
@@ -230,7 +246,7 @@ const graph = [
     "@id": SITE + "#artist",
     name: ARTIST,
     url: SITE,
-    ...(featured ? { image: abs(featured.artwork) } : {}),
+    ...(featured ? { image: abs(versionedImage(featured.artwork)) } : {}),
     logo: SITE + "/assets/img/cp-logo-512.png",
     description: "Nashville-based pop artist and songwriter, Pittsburgh-born. Live vocals and acoustic guitar: Pop, R&B, Country, Hip-Hop and originals, for venues, weddings and private events.",
     genre: ["Pop", "R&B", "Country", "Hip-Hop"],
@@ -293,7 +309,7 @@ const graph = [
     name: r.title,
     byArtist: artistRef(),
     datePublished: r.released,
-    image: abs(r.artwork),
+    image: abs(versionedImage(r.artwork)),
     url: r.link || SITE + "#music",
   })),
 ];
@@ -401,7 +417,7 @@ if (about) {
 }
 
 if (featured) {
-  const artUrl = abs(featured.artwork);
+  const artUrl = abs(versionedImage(featured.artwork));
   const altText = `${featured.title} artwork`;
   html = replaceMetaContent(html, "og:image", "property", artUrl);
   html = replaceMetaContent(html, "og:image:alt", "property", altText);
@@ -439,6 +455,19 @@ function bustAssets(source) {
 }
 html = bustAssets(html);
 writeFileSync("index.html", html);
+
+/* main.js renders the Music section from /data/music.json at runtime. Rewrite
+ * the artwork paths in that file to their versioned form at build so the
+ * browser also requests cache-safe URLs. The CMS keeps writing clean paths;
+ * the ?v= is added here on every deploy, never stored. */
+/* Only on Netlify (NETLIFY=true). data/music.json is Conor's file, written by
+ * the CMS; a local build must never leave a ?v= form in the working tree to be
+ * committed over his next save. */
+if (process.env.NETLIFY === "true") {
+  const raw = JSON.parse(readFileSync("data/music.json", "utf8"));
+  for (const r of raw.releases || []) r.artwork = versionedImage(r.artwork);
+  writeFileSync("data/music.json", JSON.stringify(raw, null, 2) + "\n");
+}
 for (const page of ["thanks.html", "404.html"]) {
   if (!existsSync(page)) continue;
   const src = readFileSync(page, "utf8");
@@ -447,7 +476,7 @@ for (const page of ["thanks.html", "404.html"]) {
 }
 
 console.log(
-  `build: og:image -> ${featured ? abs(featured.artwork) : "(no releases)"}, ` +
+  `build: og:image -> ${featured ? abs(versionedImage(featured.artwork)) : "(no releases)"}, ` +
     `dateModified -> ${dateModified}, ${visibleShows.length} visible show(s), ` +
     `${sortedReleases.length} release(s), ${videoSlots.length} video(s) in JSON-LD, ` +
     `about: ${about ? "baked" : "SKIPPED"}`
