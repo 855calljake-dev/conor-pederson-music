@@ -22,6 +22,13 @@
       "ticket_url": "https://secure.qgiv.com/event/voicescarry2026/",
       "date": "2026-10-06",
       "time": "6:00 PM"
+    },
+    {
+      "ticket_label": "FREE",
+      "date": "2026-09-20",
+      "time": "6:00 PM",
+      "venue": "Moxy Nashville Downtown",
+      "city": "Nashville, TN"
     }
   ]
 }
