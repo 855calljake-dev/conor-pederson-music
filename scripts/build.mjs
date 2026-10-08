@@ -416,13 +416,14 @@ if (about) {
   html = replaceBetweenMarkers(html, "VIDEOS", watchHtml);
 }
 
-if (featured) {
-  const artUrl = abs(versionedImage(featured.artwork));
-  const altText = `${featured.title} artwork`;
-  html = replaceMetaContent(html, "og:image", "property", artUrl);
-  html = replaceMetaContent(html, "og:image:alt", "property", altText);
-  html = replaceMetaContent(html, "twitter:image", "name", artUrl);
-}
+/* Share preview is the CP logo, not the featured single's artwork.
+ * Conor (2026-10-07): texting the site link previewed the Into Your Veins
+ * art; he expects the brand logo. The logo is fixed, so this no longer
+ * follows data/music.json. */
+const ogImageUrl = abs(versionedImage("/assets/img/cp-logo-512.png"));
+html = replaceMetaContent(html, "og:image", "property", ogImageUrl);
+html = replaceMetaContent(html, "og:image:alt", "property", "Conor Pederson logo");
+html = replaceMetaContent(html, "twitter:image", "name", ogImageUrl);
 
 /* ---- Cache-busting for CSS/JS ----
  * Cloudflare fronts this site and hands browsers `max-age=14400` on static
@@ -476,7 +477,7 @@ for (const page of ["thanks.html", "404.html"]) {
 }
 
 console.log(
-  `build: og:image -> ${featured ? abs(versionedImage(featured.artwork)) : "(no releases)"}, ` +
+  `build: og:image -> ${ogImageUrl}, ` +
     `dateModified -> ${dateModified}, ${visibleShows.length} visible show(s), ` +
     `${sortedReleases.length} release(s), ${videoSlots.length} video(s) in JSON-LD, ` +
     `about: ${about ? "baked" : "SKIPPED"}`
