@@ -76,6 +76,7 @@ a { color: inherit; }
   font-family: var(--display); font-weight: 500;
   font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.12em;
   text-decoration: none; color: var(--paper);
+  white-space: nowrap; /* six items since The Voice joined; a two-line label reads broken */
   transition: color 0.2s;
 }
 .nav__links a:hover { color: var(--blue-bright); }
@@ -91,6 +92,12 @@ a.nav__cta:hover { background: var(--blue); color: var(--ink); transform: transl
   .nav__links { width: 100%; justify-content: space-between; gap: 0.6rem; }
   .nav__links a { font-size: 0.78rem; letter-spacing: 0.06em; }
   .nav__cta { padding: 0.3rem 0.7rem; }
+}
+@media (max-width: 420px) {
+  /* Six nav items on a phone: tighten so The Voice fits on one line without overflow */
+  .nav__links { gap: 0.45rem; }
+  .nav__links a { font-size: 0.72rem; letter-spacing: 0.04em; }
+  .nav__cta { padding: 0.28rem 0.5rem; }
 }
 
 /* ============ HERO ============ */
