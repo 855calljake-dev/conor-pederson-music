@@ -56,20 +56,3 @@
   to = "/"
   status = 404
   force = true
-
-# Quote-source records for /the-voice/ live in docs/. Internal, same reason as the
-# gateway files above: the publish dir is "." so without this they would be served.
-[[redirects]]
-  from = "/docs/*"
-  to = "/"
-  status = 404
-  force = true
-
-# data/drafts.json holds draft stand-ins that are not Conor's words. The other data
-# files are the page's own content and must stay served; this one is tooling input
-# for scripts/drafts.mjs and has no business being public.
-[[redirects]]
-  from = "/data/drafts.json"
-  to = "/"
-  status = 404
-  force = true

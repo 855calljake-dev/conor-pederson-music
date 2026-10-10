@@ -6,6 +6,3 @@ node_modules/
 
 # Local Claude Code launch config
 .claude/
-
-# Throwaway drafts-overlay preview (scripts/drafts.mjs output). Never deployed to the real site.
-.drafts-preview/

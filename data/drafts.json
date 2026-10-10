@@ -1,9 +1,0 @@
-{
-  "comment": "Draft stand-ins for [[brackets]] on the site, used ONLY by scripts/drafts.mjs to build a throwaway preview. Nothing here is Conor's. Every draft exists so Jake and Conor can judge a finished layout; Conor replaces the words or strikes them. The real pages keep their brackets until he does.",
-  "drafts": [
-    {
-      "match": "voice-in-his-words",
-      "draft": "I sat at a desk in a bank that morning and sang Mercy on national television that night, with a drummer behind me for the first time in my life. No chair turned. I am still glad I walked out there. Adam told me to come back with an acoustic song, and that is exactly what I plan to do."
-    }
-  ]
-}
