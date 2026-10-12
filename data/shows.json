@@ -36,6 +36,13 @@
       "time": "2:00 PM",
       "venue": "Gray's On Main",
       "city": "Franklin, TN"
+    },
+    {
+      "ticket_label": "FREE",
+      "date": "2026-11-29",
+      "time": "2:00 PM",
+      "venue": "31 Sports Bar & Grille",
+      "city": "Bridgeville, PA"
     }
   ]
 }
