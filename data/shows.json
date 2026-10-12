@@ -29,6 +29,13 @@
       "time": "6:00 PM",
       "venue": "Moxy Nashville Downtown",
       "city": "Nashville, TN"
+    },
+    {
+      "ticket_label": "FREE",
+      "date": "2026-11-21",
+      "time": "2:00 PM",
+      "venue": "Gray's On Main",
+      "city": "Franklin, TN"
     }
   ]
 }
