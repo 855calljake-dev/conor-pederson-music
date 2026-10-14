@@ -43,6 +43,13 @@
       "time": "2:00 PM",
       "venue": "31 Sports Bar & Grille",
       "city": "Bridgeville, PA"
+    },
+    {
+      "ticket_label": "FREE",
+      "date": "2026-10-23",
+      "time": "7:00 PM",
+      "venue": "UP Rooftop Table & Tavern",
+      "city": "Nashville, TN"
     }
   ]
 }
