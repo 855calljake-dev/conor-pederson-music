@@ -50,6 +50,13 @@
       "time": "7:00 PM",
       "venue": "UP Rooftop Table & Tavern",
       "city": "Nashville, TN"
+    },
+    {
+      "ticket_label": "FREE",
+      "date": "2026-10-24",
+      "time": "2:00 PM",
+      "venue": "John Daly's",
+      "city": "Nashville, TN"
     }
   ]
 }
