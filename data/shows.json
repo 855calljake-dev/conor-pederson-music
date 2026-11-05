@@ -64,6 +64,13 @@
       "time": "7:00 PM",
       "venue": "UP Rooftop Table & Tavern",
       "city": "Nashville, TN"
+    },
+    {
+      "ticket_label": "FREE",
+      "date": "2026-11-05",
+      "time": "5:00 PM",
+      "venue": "Odie's Bar",
+      "city": "Nashville, TN"
     }
   ]
 }
